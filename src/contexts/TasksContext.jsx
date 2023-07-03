@@ -13,20 +13,21 @@ function TasksProvider({ children }) {
   console.log(tasksList);
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(`${API_URL}${QUERY}`);
-        const data = await response.data;
-        setTasksList(data);
-      } catch (error) {
-        console.error(error.code);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadData();
+    loadTasks();
   }, []);
+
+  async function loadTasks() {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${API_URL}${QUERY}`);
+      const data = await response.data;
+      setTasksList(data);
+    } catch (error) {
+      console.error(error.code);
+    } finally {
+      setLoading(false);
+    }
+  }
   async function addTask(taskName) {
     try {
       const taskObj = {
@@ -70,7 +71,6 @@ function TasksProvider({ children }) {
   }
   async function completeTask(id) {
     try {
-      // setLoading(true);
       const response = await axios.post(`${API_URL}${QUERY}/${id}/complete`);
       if (response.status !== 200) throw new Error("Task cannot be completed");
 
@@ -91,6 +91,7 @@ function TasksProvider({ children }) {
       console.error(err);
     }
   }
+  async function editTask(id, task) {}
 
   return (
     <TasksContext.Provider

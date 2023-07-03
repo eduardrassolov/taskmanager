@@ -1,16 +1,10 @@
 import { Button } from "@material-tailwind/react";
 import { useState } from "react";
 import { GrTree } from "react-icons/gr";
-import PropTypes from "prop-types";
 import OptionItem from "../OptionItem";
-// import Input from "@material-tailwind/react";
 import SubTaskItem from "./SubTaskItem";
 
-SubTasks.propTypes = {
-  onRemoveOption: PropTypes.func,
-};
-
-function SubTasks({ onRemoveOption }) {
+function SubTasks() {
   //Array of subtasks
   const [subTasks, setSubTasks] = useState([]);
   //State to show or hide the form to add subtasks
@@ -36,7 +30,9 @@ function SubTasks({ onRemoveOption }) {
   //Submit event of new subtask
   function handleAddTaskSubmit(e) {
     e.preventDefault();
-    if (!tempTask) return;
+    e.stopPropagation();
+
+    if (!tempTask.trim()) return;
 
     setSubTasks((prev) => [
       ...prev,
@@ -65,7 +61,7 @@ function SubTasks({ onRemoveOption }) {
 
   return (
     <>
-      <OptionItem onRemoveOption={onRemoveOption} name={"subtask"}>
+      <OptionItem name={"subTasks"}>
         <GrTree size={"1.5rem"} className="self-start" />
         <div className="mx-3 mb-2 w-full ">
           <h3 className="mb-2">Sub tasks</h3>

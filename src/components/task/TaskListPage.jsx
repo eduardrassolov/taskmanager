@@ -19,7 +19,7 @@ function TaskListPage({ completed = false }) {
       {completed ? (
         <>
           <Header>Completed tasks</Header>
-          <section className="mt-2 flex flex-col justify-center  ">
+          <section className="mt-2 flex flex-col justify-center">
             {tasksList
               .filter((task) => task.isCompleted?.status)
               .map((task) => {
@@ -30,7 +30,7 @@ function TaskListPage({ completed = false }) {
       ) : (
         <>
           <NewTaskForm />
-          <section className="mt-2 flex flex-col justify-center  ">
+          <section className="mt-2 flex flex-col justify-center">
             {tasksList
               .filter((task) => !task.isCompleted?.status)
               .map((task) => {

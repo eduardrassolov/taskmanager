@@ -1,14 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { Button } from "@material-tailwind/react";
-import PropTypes from "prop-types";
+import { useTaskDetail } from "../../../contexts/TaskDetailContext";
 
-Aside.propTypes = {
-  optionList: PropTypes.array,
-  onClick: PropTypes.func,
-};
-
-function Aside({ optionList = [], onClick }) {
-  //Variable check how many options are active. It need to show or hide the stack of buttons with options in aside
+function AsideTask() {
+  const { optionList, handleClickOption } = useTaskDetail();
   const quantityActiveOptions = optionList.reduce(
     (acc, option) => (option.isActive ? acc + 1 : acc),
     0
@@ -29,7 +24,7 @@ function Aside({ optionList = [], onClick }) {
                   color="gray"
                   className="mb-2 w-full bg-gray-200 hover:bg-gray-300"
                   name={`${option?.name}`}
-                  onClick={onClick}
+                  onClick={handleClickOption}
                 >
                   {option.name}
                 </Button>
@@ -42,4 +37,4 @@ function Aside({ optionList = [], onClick }) {
   );
 }
 
-export default Aside;
+export default AsideTask;

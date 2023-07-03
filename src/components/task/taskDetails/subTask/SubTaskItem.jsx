@@ -24,8 +24,7 @@ function SubTaskItem({ subTask, onEdit, onRemove, onComplete }) {
     setTitle((prev) => target.value);
   };
   function handleEditConfirm() {
-    if (!title) return;
-
+    if (!title.trim()) return;
     onEdit(subTask.id, title);
     setIsEdit((prev) => !prev);
   }
