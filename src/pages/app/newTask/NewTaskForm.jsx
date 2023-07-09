@@ -7,19 +7,25 @@ import { PlusIcon as AddIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon as CancelIcon } from "@heroicons/react/24/outline";
 
 import { newTaskReducer as reducer, initialState } from "./newTaskReducer.js";
-import { Form, redirect } from "react-router-dom";
-import { addNewTask } from "../taskList/addNewTask.js";
+import { Form } from "react-router-dom";
+import { useTasks } from "../../../contexts/TasksContext.jsx";
 
 function NewTaskForm() {
-  // const { addTask } = useTasks();
+  const { addTask } = useTasks();
   const [{ isOpen, taskName }, dispatch] = useReducer(reducer, initialState);
 
   const handleInput = ({ target: { value } }) =>
     dispatch({ type: "input", payload: value });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTask(taskName);
+    dispatch({ type: "reset" });
+  };
+
   return (
     <>
-      <Form method="POST" className="mb-5">
+      <Form onSubmit={handleSubmit} className="mb-5">
         {!isOpen ? (
           <>
             <div
@@ -62,25 +68,6 @@ function NewTaskForm() {
       </Form>
     </>
   );
-}
-
-export async function action({ request }) {
-  const formData = await request.formData();
-  const taskName = formData.get("title");
-
-  if (!taskName) return null;
-
-  const { data, error } = await addNewTask(taskName);
-  if (data) {
-    return redirect("/app");
-  }
-  if (error) {
-    return {
-      props: {
-        error,
-      },
-    };
-  }
 }
 
 export default NewTaskForm;

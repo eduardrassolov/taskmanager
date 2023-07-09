@@ -8,7 +8,6 @@ import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { getTaskById } from "./pages/app/taskList/getTaskById";
 import { loadAllTasks } from "./pages/app/taskList/loadAllTasks";
-import { action as addNewTask } from "./pages/app/newTask/NewTaskForm";
 
 const ROUTES = {
   home: "/",
@@ -40,7 +39,6 @@ const routing = createBrowserRouter([
         element: <TaskListPage />,
         //TODO check if this is needed
         loader: async () => loadAllTasks(false),
-        action: addNewTask,
       },
       {
         // Pages whows all completed tasks
