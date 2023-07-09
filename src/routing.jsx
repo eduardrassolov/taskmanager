@@ -1,17 +1,18 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import Main from "./pages/Main";
-import Pricing from "./pages/Pricing";
-import AppLayout from "./pages/AppLayout";
-import TaskListPage from "./components/task/TaskListPage";
+import Main from "./pages/main/MainPage";
+
+import AppLayout from "./pages/app/AppLayout";
+import TaskListPage from "./pages/app/taskList/TaskListPage";
 import TaskInfoPage from "./components/task/taskDetails/TaskInfoPage";
 import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
-import { getTaskById } from "./getTaskById";
+import { getTaskById } from "./pages/app/taskList/getTaskById";
+import { loadAllTasks } from "./pages/app/taskList/loadAllTasks";
+import { action as addNewTask } from "./pages/app/newTask/NewTaskForm";
 
 const ROUTES = {
   home: "/",
   app: "app",
-  pricing: "pricing",
   tasks: "tasks",
   selectedTask: "/:id",
   completed: "tasks/completed",
@@ -22,10 +23,7 @@ const routing = createBrowserRouter([
     path: ROUTES.home,
     element: <Main />,
   },
-  {
-    path: ROUTES.pricing,
-    element: <Pricing />,
-  },
+
   {
     path: ROUTES.app,
     element: <AppLayout />,
@@ -40,11 +38,16 @@ const routing = createBrowserRouter([
         // Pages with all uncompleted tasks
         path: ROUTES.tasks,
         element: <TaskListPage />,
+        //TODO check if this is needed
+        loader: async () => loadAllTasks(false),
+        action: addNewTask,
       },
       {
         // Pages whows all completed tasks
         path: ROUTES.completed,
-        element: <TaskListPage completed={true} />,
+        element: <TaskListPage showCompleted={true} />,
+        //TODO check if this is needed
+        loader: async () => loadAllTasks(true),
       },
       {
         //Shows selected task

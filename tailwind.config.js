@@ -7,6 +7,8 @@ module.exports = withMT({
   theme: {
     extend: {
       colors: {
+        bgMain: "#f5f5f5",
+        bgNav: "#ffffff",
         transparent: "transparent",
         current: "currentColor",
         white: "#ffffff",

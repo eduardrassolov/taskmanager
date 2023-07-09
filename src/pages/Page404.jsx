@@ -4,7 +4,7 @@ function Page404() {
   const navigate = useNavigate();
   return (
     <>
-      <main className="grid h-[100dvh] place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+      <main className="grid h-[100dvh-50px] place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div className="text-center">
           <p className="text-we-600 text-3xl font-bold text-wedgewood-500">
             404

@@ -13,7 +13,6 @@ const options = [
 function TaskDetailProvider({ children }) {
   const { data: selectedTask, error } = useLoaderData();
   const [editedTask, setEditedTask] = useState({ ...selectedTask });
-
   const [optionList, setOptionList] = useState(options);
 
   function editField(fieldName, fieldValue) {
@@ -28,6 +27,7 @@ function TaskDetailProvider({ children }) {
           : option
       )
     );
+
   const handleRemoveOption = (name) =>
     setOptionList((prev) =>
       prev.map((option) =>

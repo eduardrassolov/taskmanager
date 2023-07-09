@@ -1,10 +1,21 @@
 import Logo from "./Logo";
 import NavBarLink from "./NavBarLink";
+import PropTypes from "prop-types";
 
-function NavBar() {
+NavBar.propTypes = {
+  links: PropTypes.array,
+};
+const defaultProps = [
+  {
+    text: "Main",
+    to: "/",
+  },
+];
+
+function NavBar({ links = [...defaultProps] }) {
   return (
     <>
-      <nav className="absolute w-full px-5 py-2 text-white">
+      <nav className=" h-[50px] w-full bg-bgNav px-5 text-black">
         <ul className="flex items-center justify-between">
           <li>
             <Logo />
@@ -12,8 +23,11 @@ function NavBar() {
 
           <li className="mx-3">
             <div className=" flex ">
-              <NavBarLink to="/">Main</NavBarLink>
-              <NavBarLink to="/pricing">Pricing</NavBarLink>
+              {links.map((link) => (
+                <NavBarLink key={link.to} to={link.to}>
+                  {link.text}
+                </NavBarLink>
+              ))}
             </div>
           </li>
         </ul>

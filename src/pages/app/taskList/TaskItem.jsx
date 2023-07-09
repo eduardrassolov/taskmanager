@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { XCircleIcon as DeleteIcon } from "@heroicons/react/24/outline";
 import "animate.css";
-import { useTasks } from "../../contexts/TasksContext";
+import { useTasks } from "../../../contexts/TasksContext";
 import { useNavigate } from "react-router";
 
 TaskItem.propTypes = {
@@ -10,6 +10,7 @@ TaskItem.propTypes = {
 
 function TaskItem({ task }) {
   const navigate = useNavigate();
+
   // eslint-disable-next-line no-unused-vars
   const { deleteTask, completeTask } = useTasks();
 
@@ -29,7 +30,7 @@ function TaskItem({ task }) {
   return (
     <>
       <div
-        className="mx-auto my-1 flex min-w-[400px] max-w-[800px] cursor-pointer justify-between rounded-md bg-gray-100 px-5 py-2 hover:bg-gray-200"
+        className="mx-auto my-1 flex min-w-[400px] max-w-[800px] cursor-pointer justify-between rounded-md bg-white px-5 py-2 hover:bg-gray-200"
         onClick={handleItemCLick}
       >
         <div className="flex cursor-pointer items-center">

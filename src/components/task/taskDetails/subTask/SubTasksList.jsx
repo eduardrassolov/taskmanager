@@ -3,19 +3,22 @@ import { useState } from "react";
 import { GrTree } from "react-icons/gr";
 import OptionItem from "../OptionItem";
 import SubTaskItem from "./SubTaskItem";
+import { useTaskDetail } from "../../../../contexts/TaskDetailContext";
 
 function SubTasks() {
+  const { selectedTask } = useTaskDetail();
+
   //Array of subtasks
-  const [subTasks, setSubTasks] = useState([]);
+  const [subTasks, setSubTasks] = useState(selectedTask?.subTasks || []);
   //State to show or hide the form to add subtasks
   const [open, setOpen] = useState(false);
   //State to store the value of the name subtask input
-  const [tempTask, setTempTask] = useState("");
+  const [subtaskTitle, setSubtaskTitle] = useState("");
 
   //After click on button add subtask, the form is shown
   const handleAddTask = () => setOpen(true);
   //Input change event 0f the name subtask input
-  const handleInput = ({ target }) => setTempTask((prev) => target.value);
+  const handleInput = ({ target }) => setSubtaskTitle((prev) => target.value);
 
   function handleTaskCompleted({ target }) {
     const id = target.id;
@@ -28,23 +31,21 @@ function SubTasks() {
     );
   }
   //Submit event of new subtask
-  function handleAddTaskSubmit(e) {
+  function handleAddSubtaskSubmit(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!tempTask.trim()) return;
+    if (!subtaskTitle.trim()) return;
 
     setSubTasks((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), title: tempTask, isCompleted: false },
+      { id: crypto.randomUUID(), title: subtaskTitle, isCompleted: false },
     ]);
 
     cleanUp();
-  }
-  //Remove subtask
+  } //Remove subtask
   const handleRemoveSubTask = (id) =>
     setSubTasks((prev) => prev.filter((subTask) => subTask.id !== id));
-
   function handleEditSubTask(id, title) {
     console.log(title);
     setSubTasks((prev) =>
@@ -55,7 +56,7 @@ function SubTasks() {
     cleanUp();
   }
   function cleanUp() {
-    setTempTask("");
+    setSubtaskTitle("");
     setOpen(false);
   }
 
@@ -88,12 +89,12 @@ function SubTasks() {
               <span>Add subtask</span>
             </Button>
           ) : (
-            <form onSubmit={handleAddTaskSubmit} className="w-full">
+            <form onSubmit={handleAddSubtaskSubmit} className="w-full">
               <input
                 type="text"
                 className="my-2 h-8 w-full rounded-md"
                 onInput={handleInput}
-                value={tempTask}
+                value={subtaskTitle}
                 autoFocus
               />
               <div>
