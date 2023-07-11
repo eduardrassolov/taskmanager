@@ -15,6 +15,12 @@ function DetailsTitle() {
   const [tempTitle, setTemp] = useState(updTask.title);
   const [isEditMode, setIsEdit] = useState(false);
 
+  const handleCheckBox = ({ target: { checked } }) =>
+    dispatch({
+      type: "checkTask",
+      payload: { status: checked, timeCompleted: checked ? new Date() : null },
+    });
+
   function handleCloseEdit() {
     setTemp(updTask.title);
     setIsEdit((prev) => !prev);
@@ -32,6 +38,7 @@ function DetailsTitle() {
           <AiOutlineProfile size={"1.5rem"} />
           <input
             defaultChecked={updTask?.isCompleted?.status}
+            onChange={handleCheckBox}
             type="checkbox"
             id={updTask._id}
             className="mx-3 h-5 w-5 cursor-pointer rounded-full text-wedgewood-500 shadow hover:bg-wedgewood-300 focus:ring-current"

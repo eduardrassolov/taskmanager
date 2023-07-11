@@ -29,6 +29,8 @@ function reducer(state, action) {
   switch (action.type) {
     case "title":
       return { ...state, title: action.payload };
+    case "checkTask":
+      return { ...state, isCompleted: { ...action.payload } };
     case "notes":
       return { ...state, notes: action.payload };
     case "reset":

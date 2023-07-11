@@ -55,16 +55,6 @@ function TaskInfoPage() {
             <MainInfo />
             <Aside onClick={handleClicked} optionList={optionList} />
           </section>
-
-          <Button
-            className="mr-1 bg-wedgewood-400 hover:bg-wedgewood-500 "
-            // onClick={() => navigate(-1)}
-            size="md"
-            type="submit"
-          >
-            <span>Confirm</span>
-          </Button>
-          <BackButton size="md">Cancel</BackButton>
         </main>
       </CurTaskProvider>
     </>
