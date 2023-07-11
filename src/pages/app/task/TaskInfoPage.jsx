@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
+  Form,
   NavLink,
   Outlet,
   useLoaderData,
@@ -8,11 +9,12 @@ import {
 } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import { Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import Aside from "./AsideTask";
 import MainInfo from "./MainInfo";
-import BackButton from "../../buttons/BackButton";
-import { TaskDetailProvider } from "../../../contexts/TaskDetailContext";
+import { taskReducer as reducer } from "./taskReducer";
+import BackButton from "../../../components/buttons/BackButton";
+import { CurTaskProvider, useUpdateTask } from "./CurTaskContext";
 
 const options = [
   { isActive: false, name: "reminder" },
@@ -22,7 +24,6 @@ const options = [
 
 function TaskInfoPage() {
   const navigate = useNavigate();
-
   const [optionList, setOptionList] = useState(options);
 
   const handleClicked = ({ target }) => {
@@ -46,7 +47,7 @@ function TaskInfoPage() {
   return (
     <>
       <Outlet />
-      <TaskDetailProvider>
+      <CurTaskProvider>
         <main className="sm:m-auto sm:mt-5 sm:w-[75%]">
           <BackButton size="sm">Go Back</BackButton>
 
@@ -57,14 +58,15 @@ function TaskInfoPage() {
 
           <Button
             className="mr-1 bg-wedgewood-400 hover:bg-wedgewood-500 "
-            onClick={() => navigate(-1)}
+            // onClick={() => navigate(-1)}
             size="md"
+            type="submit"
           >
             <span>Confirm</span>
           </Button>
           <BackButton size="md">Cancel</BackButton>
         </main>
-      </TaskDetailProvider>
+      </CurTaskProvider>
     </>
   );
 }

@@ -1,27 +1,26 @@
 import { useReducer } from "react";
-// import Button from "../buttons/Button";
-
-import "animate.css";
 import { Button, Collapse } from "@material-tailwind/react";
 import { PlusIcon as AddIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon as CancelIcon } from "@heroicons/react/24/outline";
-
 import { newTaskReducer as reducer, initialState } from "./newTaskReducer.js";
-import { Form } from "react-router-dom";
-import { useTasks } from "../../../contexts/TasksContext.jsx";
+import { controller } from "../taskList/taskController.js";
+import { Form, redirect } from "react-router-dom";
+import "animate.css";
 
 function NewTaskForm() {
-  const { addTask } = useTasks();
   const [{ isOpen, taskName }, dispatch] = useReducer(reducer, initialState);
 
   const handleInput = ({ target: { value } }) =>
     dispatch({ type: "input", payload: value });
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    addTask(taskName);
+    const { data, error } = await controller.addNewTask(taskName);
+    if (error) console.log(error);
+    console.log(data);
     dispatch({ type: "reset" });
-  };
+    redirect("/app");
+  }
 
   return (
     <>

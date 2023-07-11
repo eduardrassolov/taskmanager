@@ -3,11 +3,10 @@ import Main from "./pages/main/MainPage";
 
 import AppLayout from "./pages/app/AppLayout";
 import TaskListPage from "./pages/app/taskList/TaskListPage";
-import TaskInfoPage from "./components/task/taskDetails/TaskInfoPage";
+import TaskInfoPage from "./pages/app/task/TaskInfoPage";
 import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
-import { getTaskById } from "./pages/app/taskList/getTaskById";
-import { loadAllTasks } from "./pages/app/taskList/loadAllTasks";
+import { controller } from "./pages/app/taskList/taskController";
 
 const ROUTES = {
   home: "/",
@@ -38,26 +37,26 @@ const routing = createBrowserRouter([
         path: ROUTES.tasks,
         element: <TaskListPage />,
         //TODO check if this is needed
-        loader: async () => loadAllTasks(false),
+        loader: async () => controller.loadAllTasks(false),
       },
       {
         // Pages whows all completed tasks
         path: ROUTES.completed,
         element: <TaskListPage showCompleted={true} />,
         //TODO check if this is needed
-        loader: async () => loadAllTasks(true),
+        loader: async () => controller.loadAllTasks(true),
       },
       {
         //Shows selected task
         path: `${ROUTES.tasks}${ROUTES.selectedTask}`,
         element: <TaskInfoPage />,
-        loader: getTaskById,
+        loader: controller.getTaskById,
       },
       {
         //Shows selected task
         path: `${ROUTES.completed}${ROUTES.selectedTask}`,
         element: <TaskInfoPage />,
-        loader: getTaskById,
+        loader: async () => controller.getTaskById(),
       },
     ],
   },

@@ -10,7 +10,7 @@ function TasksProvider({ children }) {
   const [tasksList, setTasksList] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
-  console.log(tasksList);
+  // console.log(tasksList);
 
   useEffect(() => {
     loadTasks();

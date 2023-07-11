@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { XCircleIcon as DeleteIcon } from "@heroicons/react/24/outline";
-import "animate.css";
 import { useTasks } from "../../../contexts/TasksContext";
 import { useNavigate } from "react-router";
+import { controller } from "./taskController";
+import "animate.css";
 
 TaskItem.propTypes = {
   task: PropTypes.object,
@@ -12,12 +13,12 @@ function TaskItem({ task }) {
   const navigate = useNavigate();
 
   // eslint-disable-next-line no-unused-vars
-  const { deleteTask, completeTask } = useTasks();
+  const { completeTask } = useTasks();
 
   const handleCheckbox = () => completeTask(task._id);
   const handleClickDelete = (id) => {
     try {
-      deleteTask(id);
+      controller.deleteTask(id);
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +47,7 @@ function TaskItem({ task }) {
           </label>
         </div>
         <DeleteIcon
-          className="text-500 h-8 cursor-pointer justify-items-end text-wedgewood-500 hover:text-wedgewood-800"
+          className="text-500 h-8 cursor-pointer justify-items-end text-gray-500 hover:text-wedgewood-800"
           onClick={() => handleClickDelete(task._id)}
         />
       </div>

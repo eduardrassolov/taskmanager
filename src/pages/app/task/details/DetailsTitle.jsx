@@ -5,54 +5,68 @@ import {
   AiOutlineEdit,
   AiOutlineProfile,
 } from "react-icons/ai";
-import PropTypes from "prop-types";
 import { Input } from "@material-tailwind/react";
-import { useTaskDetail } from "../../../contexts/TaskDetailContext";
-
-DetailsTitle.propTypes = {
-  task: PropTypes.object,
-};
+import { useUpdateTask } from "../CurTaskContext";
 
 // TODO: refactor code down
-function DetailsTitle({ task }) {
-  const { selectedTask } = useTaskDetail();
-  const [isEdit, setIsEdit] = useState(false);
+function DetailsTitle() {
+  const { updTask, dispatch } = useUpdateTask();
+
+  const [tempTitle, setTemp] = useState(updTask.title);
+  const [isEditMode, setIsEdit] = useState(false);
+
+  function handleCloseEdit() {
+    setTemp(updTask.title);
+    setIsEdit((prev) => !prev);
+  }
+  function handleConfirm() {
+    if (!tempTitle.trim()) return;
+    setIsEdit((prev) => !prev);
+    dispatch({ type: "title", payload: tempTitle });
+  }
+
   return (
     <>
       <section className="mb-5 flex items-center justify-between">
         <div className="flex items-center">
           <AiOutlineProfile size={"1.5rem"} />
           <input
-            defaultChecked={selectedTask.isCompleted.status}
+            defaultChecked={updTask?.isCompleted?.status}
             type="checkbox"
-            id={selectedTask._id}
+            id={updTask._id}
             className="mx-3 h-5 w-5 cursor-pointer rounded-full text-wedgewood-500 shadow hover:bg-wedgewood-300 focus:ring-current"
           />
-          {isEdit ? (
-            <Input label="Edit title" type="text" />
+
+          {isEditMode ? (
+            <Input
+              label="Edit title"
+              type="text"
+              onInput={({ target }) => setTemp(target.value)}
+              value={tempTitle}
+            />
           ) : (
-            <h3 className="focus:border-none">{selectedTask.title}</h3>
+            <h3 className="focus:border-none">{updTask.title}</h3>
           )}
         </div>
 
         {/* TODO refactor to component repeat same in DetailsTitle */}
         <div className="flex items-center gap-3">
-          {isEdit ? (
+          {isEditMode ? (
             <>
               <AiOutlineCheckCircle
                 className="cursor-pointer"
                 size={"1.1rem"}
-                onClick={() => setIsEdit(false)}
+                onClick={handleConfirm}
               />
               <AiOutlineClose
                 className="cursor-pointer"
-                onClick={() => setIsEdit(false)}
+                onClick={handleCloseEdit}
               />
             </>
           ) : (
             <>
               <AiOutlineEdit
-                className={`${isEdit ? "hidden" : ""} cursor-pointer`}
+                className={`${isEditMode ? "hidden" : ""} cursor-pointer`}
                 size={"1.2rem"}
                 onClick={() => {
                   setIsEdit(true);
