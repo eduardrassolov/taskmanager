@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { MdPriorityHigh } from "react-icons/md";
 import Bage from "./Bage";
-import { AiOutlineCalendar } from "react-icons/ai";
+import { PiBellRinging } from "react-icons/pi";
 import { GrTree } from "react-icons/gr";
 
 const formatDate = (date) => {
@@ -26,7 +26,7 @@ function BageList({ task }) {
       )}
       {reminder && (
         <Bage color={"red"}>
-          <AiOutlineCalendar size={"0.8rem"} />
+          <PiBellRinging size={"0.8rem"} />
           {formatDate(reminder)}
         </Bage>
       )}

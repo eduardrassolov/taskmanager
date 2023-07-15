@@ -1,4 +1,4 @@
-import { AiOutlineCalendar } from "react-icons/ai";
+import { PiBellRinging } from "react-icons/pi";
 import { useUpdateTask } from "../CurTaskContext";
 import { useState } from "react";
 import Toggle from "./Toggle";
@@ -30,7 +30,7 @@ function DetailReminder() {
   return (
     <div className="mb-5 flex w-full flex-col items-center pt-5">
       <div className="mb-2 flex w-full items-center">
-        <AiOutlineCalendar size={"2rem"} />
+        <PiBellRinging size={"2rem"} />
         <h2 className="ml-1">Add reminder:</h2>
       </div>
       <div className="flex w-full items-center justify-between">
