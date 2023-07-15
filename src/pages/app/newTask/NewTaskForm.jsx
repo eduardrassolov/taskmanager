@@ -17,11 +17,11 @@ function NewTaskForm() {
 
   return (
     <>
-      <Form method="post" className="mb-5">
+      <Form method="post" className="mx-auto mb-5 ">
         {!isOpen ? (
           <>
             <div
-              className="items-left justify-left mx-auto flex w-[400px] cursor-pointer rounded-full px-2 py-3 hover:bg-wedgewood-100 "
+              className="items-left justify-left mx-auto flex w-[400px] cursor-pointer px-2 py-3 hover:bg-wedgewood-100 "
               onClick={() => setIsOpen(true)}
             >
               <AddIcon className=" w-5" />
@@ -39,7 +39,7 @@ function NewTaskForm() {
               required
               type="text"
               name="title"
-              className="mx-auto flex min-w-[400px] rounded-lg bg-wedgewood-50  py-2 focus:ring-2 focus:ring-wedgewood-500 focus:ring-offset-0"
+              className="flex w-full rounded-lg bg-wedgewood-50 py-2 focus:ring-2 focus:ring-wedgewood-500 focus:ring-offset-0  sm:mx-auto"
             />
           </>
         )}

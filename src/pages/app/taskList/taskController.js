@@ -62,6 +62,23 @@ class TaskController {
       return { data: null, error };
     }
   }
+  async updateTask(id, updatedTask) {
+    delete updatedTask._id;
+    delete updatedTask.__v;
+
+    console.log("test2", updatedTask);
+
+    try {
+      const response = await axios.put(
+        `${API_URL}${QUERY}/${id}/update`,
+        updatedTask
+      );
+      const data = await response.data;
+      return { data, error: null };
+    } catch (error) {
+      return { data: null, error };
+    }
+  }
 }
 
 export const controller = new TaskController();

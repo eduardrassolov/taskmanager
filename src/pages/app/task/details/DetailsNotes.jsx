@@ -8,10 +8,13 @@ function DetailsNotes() {
   const { updTask, dispatch } = useUpdateTask();
 
   return (
-    <div className="mb-5 flex">
-      <AiOutlineComment size={"1.5rem"} />
+    <div className="mb-5 flex flex-col pt-5">
+      <div className="mb-2 flex w-full items-center">
+        <AiOutlineComment size={"2rem"} />
+        <h2 className="ml-1">Task notes:</h2>
+      </div>
 
-      <div className="ml-3 w-full">
+      <div className="w-full">
         <Textarea
           label="Add your notes..."
           className="focus:ring-0"

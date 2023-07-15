@@ -3,9 +3,10 @@ import { useState } from "react";
 import { GrTree } from "react-icons/gr";
 import SubTaskItem from "./SubTaskItem";
 import { useUpdateTask } from "../../CurTaskContext";
+import Progress from "./Progress";
 
 function SubTasksList() {
-  const { updTask } = useUpdateTask();
+  const { updTask, dispatch } = useUpdateTask();
   //Array of subtasks
   const subTasks = updTask?.subTasks || [];
   //State to show or hide the form to add subtasks
@@ -16,29 +17,50 @@ function SubTasksList() {
   //Input change event of the name subtask input
   const handleInput = ({ target }) => setSubtaskTitle((prev) => target.value);
 
-  function handleTaskCompleted({ target }) {}
   //Submit event of new subtask
   function handleAddSubtaskSubmit(e) {
     e.preventDefault();
-    e.stopPropagation();
 
     if (!subtaskTitle.trim()) return;
-  } //Remove subtask
-  const handleRemoveSubTask = (id) => function handleEditSubTask(id, title) {};
+    dispatch({
+      type: "addSubtask",
+      payload: {
+        key: crypto.randomUUID(),
+        title: subtaskTitle,
+        isCompleted: false,
+      },
+    });
+    clean();
+  }
+  function clean() {
+    setSubtaskTitle("");
+    setShowInput(false);
+  }
+
+  const countCompleted = subTasks.filter(
+    (subTask) => subTask.isCompleted
+  ).length;
+
+  console.log("subTasks", subTasks);
+  console.log("title", subtaskTitle);
 
   return (
-    <div className="mt-5 flex items-center">
-      <GrTree size={"1.5rem"} className="self-start" />
-      <div className="mx-3 mb-2 w-full ">
-        <h3 className="mb-2">Sub tasks</h3>
+    <div className="mb-5 flex flex-col items-center pt-5">
+      <div className="mb-2 flex w-full items-center">
+        <GrTree size={"2rem"} className="self-start" />
+        <h2 className="ml-1">Add subtasks:</h2>
+      </div>
+      <div className="mb-2 ml-3 w-full ">
+        {subTasks.length ? (
+          <Progress completed={countCompleted} total={subTasks.length} />
+        ) : null}
 
         {subTasks.length
           ? subTasks.map((subTask) => (
               <SubTaskItem
-                key={subTask.id}
+                key={subTask.key}
                 subTask={subTask}
-                onRemove={handleRemoveSubTask}
-                onComplete={handleTaskCompleted}
+                dispatch={dispatch}
               />
             ))
           : ""}
@@ -56,10 +78,11 @@ function SubTasksList() {
           <form onSubmit={handleAddSubtaskSubmit} className="w-full">
             <input
               type="text"
-              className="my-2 h-8 w-full rounded-md"
+              className="my-2 h-8 w-full"
               onInput={handleInput}
               value={subtaskTitle}
               autoFocus
+              required
             />
             <div>
               <Button color="green" type="submit" size="sm" className="mr-1">

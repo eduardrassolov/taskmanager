@@ -4,7 +4,7 @@ import { controller } from "../taskList/taskController";
 
 export async function action({ request }) {
   const form = await request.formData();
-  console.log(form);
+
   switch (request.method) {
     case "POST":
       console.log("post");
@@ -19,8 +19,7 @@ export async function action({ request }) {
       break;
     case "DELETE":
       const id = form.get("taskId");
-      const { data } = await controller.deleteTask(id);
-      console.log(data);
+      await controller.deleteTask(id);
       break;
     default:
       return redirect("/app");

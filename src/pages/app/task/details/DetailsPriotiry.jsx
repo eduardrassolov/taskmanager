@@ -14,9 +14,13 @@ function DetailsPriotiry() {
   const curPriority = updTask?.priority || priorityList[defaultPriority];
 
   return (
-    <div className="mt-5 flex items-center">
-      <MdPriorityHigh size={"1.5rem"} />
-      <div className="mx-3 w-fit ">
+    <div className="mb-5 flex flex-col items-center pt-5">
+      <div className="mb-2 flex w-full items-center">
+        <MdPriorityHigh size={"2rem"} />
+        <h2 className="ml-1">Choose priority of task:</h2>
+      </div>
+
+      <div className="w-full pb-4">
         <Select
           label={"Priority"}
           color="teal"

@@ -7,7 +7,8 @@ import TaskInfoPage from "./pages/app/task/TaskInfoPage";
 import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
-import { action as taskAciton } from "./pages/app/newTask/newTaskAction";
+import { action as taskAction } from "./pages/app/newTask/newTaskAction";
+import { action as editAction } from "./pages/app/task/details/editAction";
 
 const ROUTES = {
   home: "/",
@@ -39,7 +40,7 @@ const routing = createBrowserRouter([
         element: <TaskListPage />,
         //TODO check if this is needed
         loader: async () => controller.loadAllTasks(false),
-        action: taskAciton,
+        action: taskAction,
       },
       {
         // Pages whows all completed tasks
@@ -47,18 +48,20 @@ const routing = createBrowserRouter([
         element: <TaskListPage showCompleted={true} />,
         //TODO check if this is needed
         loader: async () => controller.loadAllTasks(true),
+        action: taskAction,
       },
       {
         //Shows selected task
         path: `${ROUTES.tasks}${ROUTES.selectedTask}`,
         element: <TaskInfoPage />,
         loader: controller.getTaskById,
+        action: editAction,
       },
       {
         //Shows selected task
         path: `${ROUTES.completed}${ROUTES.selectedTask}`,
         element: <TaskInfoPage />,
-        loader: async () => controller.getTaskById(),
+        loader: controller.getTaskById,
       },
     ],
   },

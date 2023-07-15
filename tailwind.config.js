@@ -13,6 +13,11 @@ module.exports = withMT({
         secondary: "rgb(194, 235, 188)",
         accent: "rgb(169, 50, 64)",
 
+        priorityNo: "#94a3b8",
+        priorityLow: "#f6e05e",
+        priorityMedium: "#ecc94b",
+        priorityHigh: "#fbbf24",
+
         bgMain: "#f5f5f5",
         bgNav: "#ffffff",
         transparent: "transparent",

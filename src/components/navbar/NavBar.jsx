@@ -15,13 +15,12 @@ const defaultProps = [
 function NavBar({ links = [...defaultProps] }) {
   return (
     <>
-      <nav className=" h-[50px] w-full bg-background px-5 text-text">
-        <ul className="flex items-center justify-between">
+      <nav className=" h-[50px] w-full border-b-2 bg-background  text-text">
+        <ul className="flex items-center justify-between gap-4">
           <li>
             <Logo />
           </li>
-
-          <li className="mx-3">
+          <li>
             <div className=" flex ">
               {links.map((link) => (
                 <NavBarLink key={link.to} to={link.to}>

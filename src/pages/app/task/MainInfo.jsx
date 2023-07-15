@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import {
   // eslint-disable-next-line no-unused-vars
   AiOutlineCalendar,
@@ -13,14 +12,24 @@ import SubTasksList from "./details/subTask/SubTasksList";
 import { Button } from "@material-tailwind/react";
 import BackButton from "../../../components/buttons/BackButton";
 import { useUpdateTask } from "./CurTaskContext";
+import { controller } from "../taskList/taskController";
+import { useNavigate, useParams } from "react-router";
 
 //TODO refactor with reusable components 'DetailsTitle', 'DetailsNotes', 'DetailReminder', 'DetailsPriotiry', 'SubTasksList'
 
 //TODO compare passing props to details components with taking props inside components
 function MainInfoTask() {
   const { updTask, dispatch } = useUpdateTask();
+  const { id: selectedId } = useParams();
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    console.log("test", updTask);
+    await controller.updateTask(selectedId, { ...updTask });
+    navigate("/app");
+  };
   return (
-    <div className="mt-5">
+    <div className="mt-5 divide-y-2 ">
       {/* Display status & name of task */}
       <DetailsTitle task={updTask} dispatch={dispatch} />
       {/* Section of notes */}
@@ -32,14 +41,17 @@ function MainInfoTask() {
       {/* Component of subTask*/}
       <SubTasksList />
 
-      <Button
-        className="mr-1 bg-wedgewood-400 hover:bg-wedgewood-500 "
-        // onClick={confirmChanges}
-        size="md"
-      >
-        <span>Confirm</span>
-      </Button>
-      <BackButton size="md">Cancel</BackButton>
+      <div className="flex justify-start pt-5">
+        <Button
+          className="mr-1 bg-wedgewood-400 hover:bg-wedgewood-500 "
+          // onClick={confirmChanges}
+          size="sm"
+          onClick={handleSubmit}
+        >
+          <span>Confirm</span>
+        </Button>
+        <BackButton size="sm">Cancel</BackButton>
+      </div>
     </div>
   );
 }

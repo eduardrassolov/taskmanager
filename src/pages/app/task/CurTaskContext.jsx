@@ -38,9 +38,25 @@ function reducer(state, action) {
     case "reminder":
       return { ...state, reminder: action.payload };
     case "priority":
-      return { ...state, reminder: action.payload };
-    case "subTask":
-      return { ...state, subTasks: action.payload };
+      return { ...state, priority: action.payload };
+    case "addSubtask":
+      return { ...state, subTasks: [...state.subTasks, action.payload] };
+    case "completeSubtask":
+      return {
+        ...state,
+        subTasks: state.subTasks.map((subTask) => {
+          if (subTask.key === action.payload)
+            return { ...subTask, isCompleted: !subTask.isCompleted };
+          return subTask;
+        }),
+      };
+    case "removeSubtask":
+      return {
+        ...state,
+        subTasks: state.subTasks.filter(
+          (subTask) => subTask.key !== action.payload
+        ),
+      };
     case "reset":
       return { ...action.payload };
 
