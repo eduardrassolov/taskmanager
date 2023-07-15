@@ -8,10 +8,8 @@ export function newTaskReducer(state, action) {
     case "open":
     case "close":
       return { ...state, isOpen: !state.isOpen };
-
     case "input":
       return { ...state, taskName: action.payload };
-
     case "reset":
       return { ...initialState };
     default:

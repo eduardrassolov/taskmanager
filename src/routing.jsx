@@ -7,6 +7,7 @@ import TaskInfoPage from "./pages/app/task/TaskInfoPage";
 import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
+import { action as taskAciton } from "./pages/app/newTask/newTaskAction";
 
 const ROUTES = {
   home: "/",
@@ -38,6 +39,7 @@ const routing = createBrowserRouter([
         element: <TaskListPage />,
         //TODO check if this is needed
         loader: async () => controller.loadAllTasks(false),
+        action: taskAciton,
       },
       {
         // Pages whows all completed tasks

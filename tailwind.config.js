@@ -3,10 +3,16 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
+        text: "rgb(2, 10, 1)",
+        background: "rgb(255, 255, 255)",
+        primary: "rgb(32, 40, 106)",
+        secondary: "rgb(194, 235, 188)",
+        accent: "rgb(169, 50, 64)",
+
         bgMain: "#f5f5f5",
         bgNav: "#ffffff",
         transparent: "transparent",

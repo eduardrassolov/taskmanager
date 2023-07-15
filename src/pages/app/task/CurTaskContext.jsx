@@ -6,8 +6,10 @@ const CurTaskContext = createContext();
 // eslint-disable-next-line react/prop-types
 function CurTaskProvider({ children }) {
   const { data: currentTask } = useLoaderData();
+
+  //temporary state of task state
   const [updTask, dispatch] = useReducer(reducer, { ...currentTask });
-  console.log("UPD TASK", updTask);
+  console.log("UPDATED TASK", updTask);
   return (
     <>
       <CurTaskContext.Provider value={{ currentTask, updTask, dispatch }}>
@@ -33,6 +35,12 @@ function reducer(state, action) {
       return { ...state, isCompleted: { ...action.payload } };
     case "notes":
       return { ...state, notes: action.payload };
+    case "reminder":
+      return { ...state, reminder: action.payload };
+    case "priority":
+      return { ...state, reminder: action.payload };
+    case "subTask":
+      return { ...state, subTasks: action.payload };
     case "reset":
       return { ...action.payload };
 

@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import { XCircleIcon as DeleteIcon } from "@heroicons/react/24/outline";
-import { useTasks } from "../../../contexts/TasksContext";
+// import { XCircleIcon as DeleteIcon } from "@heroicons/react/24/outline";
+import { PiTrash } from "react-icons/pi";
 import { useNavigate } from "react-router";
-import { controller } from "./taskController";
+import { Form } from "react-router-dom";
 import "animate.css";
+import { controller } from "./taskController";
 
 TaskItem.propTypes = {
   task: PropTypes.object,
@@ -12,18 +13,11 @@ TaskItem.propTypes = {
 function TaskItem({ task }) {
   const navigate = useNavigate();
 
-  // eslint-disable-next-line no-unused-vars
-  const { completeTask } = useTasks();
-
-  const handleCheckbox = () => completeTask(task._id);
-  const handleClickDelete = (id) => {
-    try {
-      controller.deleteTask(id);
-    } catch (err) {
-      console.log(err);
-    }
+  const handleCheckbox = async () => {
+    const response = await controller.completeTask(task._id);
+    console.log(response);
+    navigate("/app/tasks");
   };
-
   const handleItemCLick = ({ target }) => {
     if (target.tagName === "DIV" || target.tagName === "LABEL")
       navigate(`${task._id}`);
@@ -31,7 +25,7 @@ function TaskItem({ task }) {
   return (
     <>
       <div
-        className="mx-auto my-1 flex min-w-[400px] max-w-[800px] cursor-pointer justify-between rounded-md bg-white px-5 py-2 hover:bg-gray-200"
+        className="mx-auto  my-1 flex min-w-[400px] max-w-[800px] cursor-pointer justify-between rounded-md bg-gray-50 px-5 py-4 hover:bg-gray-200"
         onClick={handleItemCLick}
       >
         <div className="flex cursor-pointer items-center">
@@ -46,11 +40,13 @@ function TaskItem({ task }) {
             {task.title}
           </label>
         </div>
-        <DeleteIcon
-          className="text-500 h-8 cursor-pointer justify-items-end text-gray-500 hover:text-wedgewood-800"
-          onClick={() => handleClickDelete(task._id)}
-        />
-      </div>
+
+        <Form method="delete" className="flex items-center">
+          <button type="submit" name="taskId" value={task._id}>
+            <PiTrash className="text-500 h-6 w-auto cursor-pointer text-gray-500 hover:text-wedgewood-800" />
+          </button>
+        </Form>
+      </div>{" "}
     </>
   );
 }

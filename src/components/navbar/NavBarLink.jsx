@@ -10,7 +10,7 @@ function NavBarLink({ children, to }) {
   return (
     <NavLink
       to={to}
-      className={"mx-2 hover:text-wedgewood-200 active:text-wedgewood-300"}
+      className={"mx-2 hover:text-gray-500 active:text-wedgewood-300"}
     >
       {children}
     </NavLink>

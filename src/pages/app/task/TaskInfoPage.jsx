@@ -10,7 +10,6 @@ import {
 import { Button } from "@material-tailwind/react";
 import { Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
 import { useReducer, useState } from "react";
-import Aside from "./AsideTask";
 import MainInfo from "./MainInfo";
 import { taskReducer as reducer } from "./taskReducer";
 import BackButton from "../../../components/buttons/BackButton";
@@ -48,14 +47,10 @@ function TaskInfoPage() {
     <>
       <Outlet />
       <CurTaskProvider>
-        <main className="sm:m-auto sm:mt-5 sm:w-[75%]">
+        <section className="mt-5 border-red-100 ring-1 sm:m-auto sm:w-[50%]">
           <BackButton size="sm">Go Back</BackButton>
-
-          <section className="mt-4 flex h-full w-full ">
-            <MainInfo />
-            <Aside onClick={handleClicked} optionList={optionList} />
-          </section>
-        </main>
+          <MainInfo />
+        </section>
       </CurTaskProvider>
     </>
   );

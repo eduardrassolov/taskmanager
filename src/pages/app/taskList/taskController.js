@@ -30,9 +30,18 @@ class TaskController {
       return { data: null, error: error };
     }
   }
+  async completeTask(id) {
+    try {
+      const response = await axios.post(`${API_URL}${QUERY}/${id}/complete`);
+      console.log(response);
+      if (response.status !== 200) throw new Error("Task cannot be completed");
+    } catch (err) {
+      console.error(err);
+    }
+  }
   async deleteTask(id) {
     try {
-      const res = await axios.delete(`${API_URL}${QUERY}/${id}`);
+      const res = await axios.delete(`${API_URL}${QUERY}/${id}/delete`);
 
       if (res.status !== 200)
         throw new Error("Something went wrong while deleting task");

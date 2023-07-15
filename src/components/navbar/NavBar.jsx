@@ -15,7 +15,7 @@ const defaultProps = [
 function NavBar({ links = [...defaultProps] }) {
   return (
     <>
-      <nav className=" h-[50px] w-full bg-bgNav px-5 text-black">
+      <nav className=" h-[50px] w-full bg-background px-5 text-text">
         <ul className="flex items-center justify-between">
           <li>
             <Logo />

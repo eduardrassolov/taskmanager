@@ -12,7 +12,7 @@ function TaskListPage({ showCompleted = false }) {
 
   return (
     <>
-      <section className="flex h-[calc(100dvh-50px)] flex-col overflow-scroll bg-bgMain pt-8">
+      <section className="flex h-[calc(100dvh-50px)] flex-col overflow-scroll bg-background pt-8">
         <>
           {!showCompleted ? <NewTaskForm /> : null}
 

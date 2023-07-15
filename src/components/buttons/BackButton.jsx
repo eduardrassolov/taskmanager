@@ -14,7 +14,7 @@ function BackButton({ children, size = "sm" }) {
       <Button
         variant="outlined"
         onClick={() => navigate(-1)}
-        className=" border-wedgewood-400 text-wedgewood-400"
+        className="bg-background hover:bg-wedgewood-100"
         size={size}
       >
         <span>{children}</span>
