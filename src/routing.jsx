@@ -8,7 +8,6 @@ import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
 import { action as taskAction } from "./pages/app/newTask/newTaskAction";
-import { action as editAction } from "./pages/app/task/details/editAction";
 
 const ROUTES = {
   home: "/",
@@ -55,7 +54,6 @@ const routing = createBrowserRouter([
         path: `${ROUTES.tasks}${ROUTES.selectedTask}`,
         element: <TaskInfoPage />,
         loader: controller.getTaskById,
-        action: editAction,
       },
       {
         //Shows selected task
