@@ -1,9 +1,9 @@
-import { Button } from "@material-tailwind/react";
 import { useState } from "react";
 import { GrTree } from "react-icons/gr";
 import SubTaskItem from "./SubTaskItem";
 import { useUpdateTask } from "../../CurTaskContext";
 import Progress from "./Progress";
+import Button from "../../../../../components/buttons/Button";
 
 function SubTasksList() {
   const { updTask, dispatch } = useUpdateTask();
@@ -66,12 +66,7 @@ function SubTasksList() {
           : ""}
 
         {!showInput ? (
-          <Button
-            variant="text"
-            color="gray"
-            className="mr-1"
-            onClick={() => setShowInput(true)}
-          >
+          <Button size={"xs"} onClick={() => setShowInput(true)}>
             <span>Add subtask</span>
           </Button>
         ) : (
@@ -84,14 +79,13 @@ function SubTasksList() {
               autoFocus
               required
             />
-            <div>
-              <Button color="green" type="submit" size="sm" className="mr-1">
+            <div className="flex">
+              <Button type="submit" size="xs">
                 Add
               </Button>
               <Button
-                variant="text"
-                color="gray"
-                size="sm"
+                variant="outlined"
+                size="xs"
                 onClick={() => setShowInput(false)}
               >
                 Cancel

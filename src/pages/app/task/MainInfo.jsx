@@ -9,11 +9,10 @@ import DetailReminder from "./details/DetailReminder";
 import DetailsPriotiry from "./details/DetailsPriotiry";
 import SubTasksList from "./details/subTask/SubTasksList";
 
-import { Button } from "@material-tailwind/react";
-import BackButton from "../../../components/buttons/BackButton";
 import { useUpdateTask } from "./CurTaskContext";
 import { controller } from "../taskList/taskController";
 import { useNavigate, useParams } from "react-router";
+import Button from "../../../components/buttons/Button";
 
 //TODO refactor with reusable components 'DetailsTitle', 'DetailsNotes', 'DetailReminder', 'DetailsPriotiry', 'SubTasksList'
 
@@ -41,7 +40,7 @@ function MainInfoTask() {
       {/* Component of subTask*/}
       <SubTasksList />
 
-      <div className="flex justify-start pt-5">
+      <div className="flex justify-end pt-5">
         <Button
           className="mr-1 bg-wedgewood-400 hover:bg-wedgewood-500 "
           // onClick={confirmChanges}
@@ -50,7 +49,9 @@ function MainInfoTask() {
         >
           <span>Confirm</span>
         </Button>
-        <BackButton size="sm">Cancel</BackButton>
+        <Button variant="outlined" onClick={() => navigate(-1)}>
+          Cancel
+        </Button>
       </div>
     </div>
   );

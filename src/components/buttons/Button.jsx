@@ -3,18 +3,31 @@ import "animate.css";
 
 Button.propTypes = {
   children: PropTypes.string,
-  animation: PropTypes.string,
+  variant: PropTypes.string,
   onClick: PropTypes.func,
   type: PropTypes.string,
+  size: PropTypes.string,
 };
 
-function Button({ children, animation, onClick, type = null }) {
+const btnStyle = {
+  defaultStyle:
+    "mr-1 rounded-lg border-[1px] transition-colors px-4 py-2  duration-300 flex items-center",
+  primary:
+    "border-blueribbon-500 bg-blueribbon-500 text-blueribbon-50 hover:bg-blueribbon-700 active:bg-blueribbon-800",
+  outlined:
+    "border-blueribbon-700 text-blueribbon-700 hover:bg-blueribbon-50 active:bg-blueribbon-100",
+};
+
+function Button({
+  children,
+  onClick,
+  variant = "primary",
+  size = "sm",
+  type = "button",
+}) {
+  const style = `${btnStyle.defaultStyle} ${btnStyle[variant]} text-` + size;
   return (
-    <button
-      className={`animate__animated ${animation} mr-2 rounded-md bg-wedgewood-500 px-5 py-2 text-base text-white hover:bg-wedgewood-600 active:bg-wedgewood-700`}
-      onClick={onClick}
-      type={type && type}
-    >
+    <button className={style} onClick={onClick} type={type}>
       {children}
     </button>
   );

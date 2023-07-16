@@ -12,7 +12,7 @@ function Main() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
         </h1>
         <NavLink to="app" className={"mx-auto my-10"}>
-          <Button animation={"animate__fadeInUp"}>Start</Button>
+          <Button size="xl">Start</Button>
         </NavLink>
       </main>
     </>
