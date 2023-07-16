@@ -26,7 +26,7 @@ function TaskItem({ task }) {
 
   const taskItemStyle = () => {
     let style =
-      "mx-auto  my-1 flex flex-col min-w-[350px] max-w-[800px] cursor-pointer justify-between border-l-4 bg-gray-100 px-5 py-4 hover:bg-gray-200 ";
+      "mx-auto my-1 flex flex-col cursor-pointer justify-between border-l-4 bg-gray-100 px-5 py-4 hover:bg-gray-200 ";
     switch (task?.priority?.toLowerCase()) {
       case "low":
         return style + "border-green-300";

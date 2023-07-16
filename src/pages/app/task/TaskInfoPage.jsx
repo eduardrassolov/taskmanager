@@ -9,10 +9,12 @@ function TaskInfoPage() {
     <>
       <Outlet />
       <CurTaskProvider>
-        <section className="mx-2 mb-4 mt-4 max-w-xl bg-background sm:m-auto sm:mt-4">
-          <Header>Edit Task</Header>
-          <BackButton size="sm">Go Back</BackButton>
-          <MainInfo />
+        <section className="h-[calc(100dvh-50px)] w-full overflow-scroll bg-background pb-5 pt-8">
+          <div className="mx-auto min-w-[350px] max-w-[600px]">
+            <Header>Edit Task</Header>
+            <BackButton size="sm">Go Back</BackButton>
+            <MainInfo />
+          </div>
         </section>
       </CurTaskProvider>
     </>

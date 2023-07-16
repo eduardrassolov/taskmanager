@@ -12,14 +12,14 @@ function TaskListPage({ showCompleted = false }) {
 
   return (
     <>
-      <section className="flex h-[calc(100dvh-50px)] flex-col overflow-scroll bg-background pt-8">
-        <>
+      <section className="h-[calc(100dvh-50px)] w-full overflow-scroll bg-background pb-5 pt-8">
+        <div className="mx-auto min-w-[350px] max-w-[600px]">
           {!showCompleted ? <NewTaskForm /> : null}
 
           {tasksList.map((task) => (
             <TaskItem key={crypto.randomUUID()} task={task} />
           ))}
-        </>
+        </div>
       </section>
     </>
   );

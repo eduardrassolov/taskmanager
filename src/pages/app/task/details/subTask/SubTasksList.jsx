@@ -50,7 +50,7 @@ function SubTasksList() {
         <GrTree size={"2rem"} className="self-start" />
         <h2 className="ml-1">Add subtasks:</h2>
       </div>
-      <div className="mb-2 ml-3 w-full ">
+      <div className="mb-2 w-full">
         {subTasks.length ? (
           <Progress completed={countCompleted} total={subTasks.length} />
         ) : null}

@@ -17,7 +17,10 @@ function SubTaskItem({ subTask, dispatch }) {
   }
 
   return (
-    <div className="mb-2 flex justify-between" key={crypto.randomUUID()}>
+    <div
+      className="mb-2 flex justify-between  bg-gray-50 "
+      key={crypto.randomUUID()}
+    >
       <div className="flex items-center">
         <input
           id={subTask.key}

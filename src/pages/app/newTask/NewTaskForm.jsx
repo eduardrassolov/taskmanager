@@ -21,7 +21,7 @@ function NewTaskForm() {
         {!isOpen ? (
           <>
             <div
-              className="items-left justify-left mx-auto flex w-[400px] cursor-pointer px-2 py-3 hover:bg-wedgewood-100 "
+              className="items-left justify-left mx-auto flex  cursor-pointer px-2 py-3 hover:bg-gray-100 "
               onClick={() => setIsOpen(true)}
             >
               <AddIcon className=" w-5" />
@@ -39,21 +39,22 @@ function NewTaskForm() {
               required
               type="text"
               name="title"
-              className="flex w-full rounded-lg bg-wedgewood-50 py-2 focus:ring-2 focus:ring-wedgewood-500 focus:ring-offset-0  sm:mx-auto"
+              className="flex w-full py-2 sm:mx-auto"
             />
           </>
         )}
         <Collapse open={isOpen}>
-          <div className="mx-auto mt-2  flex w-[400px] items-center p-0">
+          <div className=" mt-2  flex  items-center p-0">
             <Button
               className="bg-wedgewood-400 hover:bg-wedgewood-500"
               type="submit"
+              size="sm"
             >
               Add task
             </Button>
             <CancelIcon
               onClick={() => setIsOpen(false)}
-              className="text-slate-600 ml-2 h-10 w-10 cursor-pointer rounded-lg transition duration-300 hover:bg-gray-100"
+              className="text-slate-600 ml-2 h-8 w-8 cursor-pointer rounded-lg transition duration-300 hover:bg-gray-100"
             />
           </div>
         </Collapse>
