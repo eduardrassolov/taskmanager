@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import "animate.css";
 
 Button.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
   variant: PropTypes.string,
   onClick: PropTypes.func,
   type: PropTypes.string,

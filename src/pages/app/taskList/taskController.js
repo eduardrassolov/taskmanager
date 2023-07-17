@@ -14,17 +14,24 @@ class TaskController {
       return { data: null, error: error };
     }
   }
+
+  _GenereateTask(title) {
+    return {
+      title,
+      timeCreated: new Date(),
+      isCompleted: {
+        status: false,
+        timeCompleted: null,
+      },
+      timeCompleted: null,
+    };
+  }
+
   async addNewTask(taskName) {
     try {
-      const task = {
-        title: taskName,
-        timeCreated: new Date(),
-        isCompleted: {
-          status: false,
-          timeCompleted: null,
-        },
-      };
+      const task = this._GenereateTask(taskName);
       const response = await axios.post(`${API_URL}${QUERY}`, task);
+
       return { data: response.status, error: null };
     } catch (error) {
       return { data: null, error: error };

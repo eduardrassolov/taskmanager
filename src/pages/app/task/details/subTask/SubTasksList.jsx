@@ -19,8 +19,6 @@ function SubTasksList() {
 
   //Submit event of new subtask
   function handleAddSubtaskSubmit(e) {
-    e.preventDefault();
-
     if (!subtaskTitle.trim()) return;
     dispatch({
       type: "addSubtask",
@@ -70,17 +68,17 @@ function SubTasksList() {
             <span>Add subtask</span>
           </Button>
         ) : (
-          <form onSubmit={handleAddSubtaskSubmit} className="w-full">
+          <div className="w-full">
             <input
               type="text"
-              className="my-2 h-8 w-full"
+              className="my-2 h-8 w-full rounded-lg"
               onInput={handleInput}
               value={subtaskTitle}
               autoFocus
               required
             />
             <div className="flex">
-              <Button type="submit" size="xs">
+              <Button onClick={handleAddSubtaskSubmit} size="xs">
                 Add
               </Button>
               <Button
@@ -91,7 +89,7 @@ function SubTasksList() {
                 Cancel
               </Button>
             </div>
-          </form>
+          </div>
         )}
       </div>
     </div>

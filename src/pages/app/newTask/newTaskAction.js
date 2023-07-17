@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { redirect } from "react-router";
+
 import { controller } from "../taskList/taskController";
 
 export async function action({ request }) {
@@ -12,7 +12,7 @@ export async function action({ request }) {
         const title = form.get("title");
 
         const { data } = await controller.addNewTask(title);
-        console.log(data);
+        return data;
       } catch (error) {
         console.log(error);
       }
@@ -22,7 +22,6 @@ export async function action({ request }) {
       await controller.deleteTask(id);
       break;
     default:
-      return redirect("/app");
+      return null;
   }
-  return redirect("/app");
 }

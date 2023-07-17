@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter, redirect } from "react-router-dom";
 import Main from "./pages/main/MainPage";
 
 import AppLayout from "./pages/app/AppLayout";
@@ -39,7 +39,10 @@ const routing = createBrowserRouter([
         element: <TaskListPage />,
         //TODO check if this is needed
         loader: async () => controller.loadAllTasks(false),
-        action: taskAction,
+        action: async ({ request }) => {
+          await taskAction({ request });
+          return redirect(`/app`);
+        },
       },
       {
         // Pages whows all completed tasks
@@ -47,7 +50,10 @@ const routing = createBrowserRouter([
         element: <TaskListPage showCompleted={true} />,
         //TODO check if this is needed
         loader: async () => controller.loadAllTasks(true),
-        action: taskAction,
+        action: async ({ request }) => {
+          await taskAction({ request });
+          return redirect(`/app/tasks/completed`);
+        },
       },
       {
         //Shows selected task

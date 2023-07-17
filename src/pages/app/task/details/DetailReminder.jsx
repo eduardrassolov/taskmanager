@@ -36,11 +36,12 @@ function DetailReminder() {
       <div className="flex w-full items-center justify-between">
         <input
           type="datetime-local"
-          className=" mr-2 w-full rounded-xl focus:border-wedgewood-400 focus:ring-0 focus:ring-wedgewood-400 focus:ring-offset-0"
+          className=" mr-2 w-full rounded-xl focus:ring-0 focus:ring-offset-0 disabled:text-gray-400"
           onChange={handleReminderChange}
           value={reminderDate}
           disabled={!isDisabled}
           min={minDate}
+          required={isDisabled}
         />
 
         <button

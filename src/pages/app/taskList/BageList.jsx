@@ -17,7 +17,7 @@ function BageList({ task }) {
   const { priority, reminder, subTasks } = task;
 
   return (
-    <div className="mx-5 flex">
+    <div className="mx-5 mt-1 flex">
       {priority !== "No priority" && (
         <Bage color={"blue"}>
           <MdPriorityHigh size={"0.8rem"} />

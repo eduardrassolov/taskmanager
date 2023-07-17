@@ -17,6 +17,7 @@ function TaskItem({ task }) {
   const handleCheckbox = async () => {
     const response = await controller.completeTask(task._id);
     console.log(response);
+
     navigate("/app/tasks");
   };
   const handleItemCLick = ({ target }) => {

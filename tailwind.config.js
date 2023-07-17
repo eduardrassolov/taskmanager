@@ -13,6 +13,10 @@ module.exports = withMT({
         secondary: "rgb(194, 235, 188)",
         accent: "rgb(169, 50, 64)",
 
+        toastSuccess: "#34d399",
+        toastError: "#f87171",
+        toastWarning: "#fbbf24",
+
         priorityNo: "#94a3b8",
         priorityLow: "#f6e05e",
         priorityMedium: "#ecc94b",

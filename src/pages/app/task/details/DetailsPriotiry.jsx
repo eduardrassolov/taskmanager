@@ -23,7 +23,6 @@ function DetailsPriotiry() {
       <div className="w-full pb-4">
         <Select
           label={"Priority"}
-          color="teal"
           value={curPriority}
           onChange={handlePriority}
         >
