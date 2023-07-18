@@ -31,7 +31,7 @@ function DetailReminder() {
     <div className="mb-5 flex w-full flex-col items-center pt-5">
       <div className="mb-2 flex w-full items-center">
         <PiBellRinging size={"2rem"} />
-        <h2 className="ml-1">Add reminder:</h2>
+        <h2 className="ml-1">Reminder:</h2>
       </div>
       <div className="flex w-full items-center justify-between">
         <input

@@ -46,7 +46,7 @@ function SubTasksList() {
     <div className="mb-5 flex flex-col items-center pt-5">
       <div className="mb-2 flex w-full items-center">
         <GrTree size={"2rem"} className="self-start" />
-        <h2 className="ml-1">Add subtasks:</h2>
+        <h2 className="ml-1">Subtasks:</h2>
       </div>
       <div className="mb-2 w-full">
         {subTasks.length ? (

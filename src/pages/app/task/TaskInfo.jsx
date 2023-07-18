@@ -21,21 +21,29 @@ function TaskInfo() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     await controller.updateTask(selectedId, { ...updTask });
     navigate("/app");
   };
+
+  const formatedDate = new Date(updTask?.timeCreated).toLocaleDateString(
+    "en-GB",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    }
+  );
   return (
-    <div className="mt-5 divide-y-2 divide-black ">
-      <Form onSubmit={handleSubmit}>
-        {/* Display status & name of task */}
+    <div className="mt-5 ">
+      <h2 className="text-left text-sm">Created: {formatedDate}</h2>
+      <Form onSubmit={handleSubmit} className="divide-gray divide-y-2">
         <DetailsTitle task={updTask} dispatch={dispatch} />
-        {/* Section of notes */}
         <DetailsNotes />
-        {/* Component of reminder option*/}
         <DetailReminder />
-        {/* Component of priority*/}
         <DetailsPriotiry />
-        {/* Component of subTask*/}
         <SubTasksList />
 
         <div className="flex justify-end pt-5">

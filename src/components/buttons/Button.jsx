@@ -16,6 +16,7 @@ const btnStyle = {
     "border-blueribbon-500 bg-blueribbon-500 text-blueribbon-50 hover:bg-blueribbon-700 active:bg-blueribbon-800",
   outlined:
     "border-blueribbon-700 text-blueribbon-700 hover:bg-blueribbon-50 active:bg-blueribbon-100",
+  noBorder: "hover:bg-gray-200 border-none",
 };
 
 function Button({

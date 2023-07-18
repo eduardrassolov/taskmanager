@@ -25,7 +25,7 @@ function DetailsPriotiry() {
           label={"Priority"}
           value={curPriority}
           onChange={handlePriority}
-          className="w-full rounded-xl focus:ring-0 focus:ring-offset-0"
+          className="w-full rounded-xl p-1 focus:ring-0 focus:ring-offset-0"
         >
           {priorityList.map((priority) => (
             <option key={priority} value={priority}>

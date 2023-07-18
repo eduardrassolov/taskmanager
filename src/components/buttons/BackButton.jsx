@@ -12,7 +12,7 @@ function BackButton({ children, size = "xs" }) {
   const navigate = useNavigate();
   return (
     <>
-      <Button variant="outlined" onClick={() => navigate(-1)} size={size}>
+      <Button variant="noBorder" onClick={() => navigate(-1)} size={size}>
         <BiArrowBack size={"1rem"} className="mr-1" />
         {children}
       </Button>
