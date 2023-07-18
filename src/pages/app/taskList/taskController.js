@@ -2,12 +2,31 @@ import axios from "axios";
 import { API_URL, QUERY } from "../../../config.js";
 
 class TaskController {
-  async loadAllTasks(isCompleted) {
+  _sortTasksByDate(tasks) {
+    return tasks.sort((a, b) => {
+      if (a.timeCreated < b.timeCreated) return -1;
+      if (a.timeCreated > b.timeCreated) return 1;
+      return 0;
+    });
+  }
+
+  _sortTasksByName(tasks) {
+    return tasks.sort((a, b) => {
+      if (a.title < b.title) return -1;
+      if (a.title > b.title) return 1;
+      return 0;
+    });
+  }
+
+  async loadAllTasks(isCompleted, sortBy = "name") {
     try {
       const response = await axios.get(`${API_URL}${QUERY}`);
       const data = await response.data;
+
       return {
-        data: data.filter((task) => task.isCompleted.status === isCompleted),
+        data: this._sortTasksByDate(
+          data.filter((task) => task.isCompleted.status === isCompleted)
+        ),
         error: null,
       };
     } catch (error) {

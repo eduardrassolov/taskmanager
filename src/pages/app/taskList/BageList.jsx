@@ -3,6 +3,7 @@ import { MdPriorityHigh } from "react-icons/md";
 import Bage from "./Bage";
 import { PiBellRinging } from "react-icons/pi";
 import { GrTree } from "react-icons/gr";
+import { calcStats } from "./calcStats";
 
 const formatDate = (date) => {
   const options = {
@@ -15,6 +16,7 @@ const formatDate = (date) => {
 // eslint-disable-next-line react/prop-types
 function BageList({ task }) {
   const { priority, reminder, subTasks } = task;
+  const { completed, total } = calcStats(subTasks);
 
   return (
     <div className="mx-5 mt-1 flex">
@@ -33,7 +35,7 @@ function BageList({ task }) {
       {subTasks.length > 0 && (
         <Bage color={"green"}>
           <GrTree size={"0.8rem"} />
-          Subtasks
+          {`${completed}/${total}`}
         </Bage>
       )}
     </div>

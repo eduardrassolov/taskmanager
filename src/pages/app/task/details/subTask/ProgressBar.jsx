@@ -8,7 +8,10 @@ ProgressBar.propTypes = {
 
 function ProgressBar({ completed, total }) {
   const progress = Math.round((completed / total) * 100);
-  const color = progress < 100 ? "blueribbon" : "green";
+  let style =
+    "ease-[cubic-bezier(0.65, 0, 0.35, 1)] h-full w-full transition-transform duration-[660ms] ";
+  const final =
+    style + (progress === 100 ? "bg-green-500" : "bg-blueribbon-600");
 
   return (
     <div className="mb-4 flex items-center">
@@ -24,7 +27,7 @@ function ProgressBar({ completed, total }) {
         value={progress}
       >
         <Progress.Indicator
-          className={`ease-[cubic-bezier(0.65, 0, 0.35, 1)] h-full w-full bg-${color}-400 transition-transform duration-[660ms]`}
+          className={final}
           style={{ transform: `translateX(-${100 - progress}%)` }}
         />
       </Progress.Root>

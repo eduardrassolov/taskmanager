@@ -15,10 +15,9 @@ function TaskItem({ task }) {
   const navigate = useNavigate();
 
   const handleCheckbox = async () => {
-    const response = await controller.completeTask(task._id);
-    console.log(response);
-
-    navigate("/app/tasks");
+    controller.completeTask(task._id).then((res) => {
+      navigate("/app/tasks");
+    });
   };
   const handleItemCLick = ({ target }) => {
     if (target.tagName === "DIV" || target.tagName === "LABEL")

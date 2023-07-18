@@ -1,9 +1,4 @@
 /* eslint-disable no-unused-vars */
-import {
-  // eslint-disable-next-line no-unused-vars
-  AiOutlineCalendar,
-} from "react-icons/ai";
-
 import DetailsTitle from "./details/DetailsTitle";
 import DetailsNotes from "./details/DetailsNotes";
 import DetailReminder from "./details/DetailReminder";
@@ -26,12 +21,11 @@ function TaskInfo() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("test", updTask);
     await controller.updateTask(selectedId, { ...updTask });
     navigate("/app");
   };
   return (
-    <div className="mt-5 divide-y-2 ">
+    <div className="mt-5 divide-y-2 divide-black ">
       <Form onSubmit={handleSubmit}>
         {/* Display status & name of task */}
         <DetailsTitle task={updTask} dispatch={dispatch} />

@@ -18,7 +18,7 @@ function DetailsTitle({ task, dispatch }) {
 
   return (
     <>
-      <div className="mb-5 flex flex-col ">
+      <div className="mb-5 flex flex-col">
         <div className="mb-2 flex w-full items-center">
           <AiOutlineProfile size={"2rem"} />
           <h2 className="ml-1">Task name:</h2>

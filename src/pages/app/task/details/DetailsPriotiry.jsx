@@ -8,8 +8,8 @@ const defaultPriority = priorityList.indexOf("No priority");
 function DetailsPriotiry() {
   const { updTask, dispatch } = useUpdateTask();
 
-  const handlePriority = (value) =>
-    dispatch({ type: "priority", payload: value });
+  const handlePriority = ({ target }) =>
+    dispatch({ type: "priority", payload: target.value });
 
   const curPriority = updTask?.priority || priorityList[defaultPriority];
 
