@@ -33,7 +33,7 @@ function DetailsTitle({ task, dispatch }) {
           />
           <input
             type="text"
-            className="w-full rounded-lg"
+            className="w-full rounded-lg text-base"
             onInput={handleInput}
             value={task?.title}
             required

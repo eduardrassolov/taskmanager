@@ -1,4 +1,3 @@
-import { Textarea } from "@material-tailwind/react";
 import { AiOutlineComment } from "react-icons/ai";
 import { useUpdateTask } from "../CurTaskContext";
 
@@ -15,9 +14,10 @@ function DetailsNotes() {
       </div>
 
       <div className="w-full">
-        <Textarea
+        <textarea
           label="Add your notes..."
-          className="focus:ring-0"
+          className="w-full resize-none rounded-lg text-base focus:ring-0"
+          rows={3}
           defaultValue={updTask.notes || ""}
           onInput={({ target }) =>
             dispatch({ type: "notes", payload: target.value })

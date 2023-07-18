@@ -1,5 +1,5 @@
 import { MdPriorityHigh } from "react-icons/md";
-import { Option, Select } from "@material-tailwind/react";
+// import { Option, Select } from "@material-tailwind/react";
 import { useUpdateTask } from "../CurTaskContext";
 
 const priorityList = ["High", "Medium", "Low", "No priority"];
@@ -21,17 +21,18 @@ function DetailsPriotiry() {
       </div>
 
       <div className="w-full pb-4">
-        <Select
+        <select
           label={"Priority"}
           value={curPriority}
           onChange={handlePriority}
+          className="w-full rounded-xl focus:ring-0 focus:ring-offset-0"
         >
           {priorityList.map((priority) => (
-            <Option key={priority} value={priority}>
+            <option key={priority} value={priority}>
               {priority}
-            </Option>
+            </option>
           ))}
-        </Select>
+        </select>
       </div>
     </div>
   );

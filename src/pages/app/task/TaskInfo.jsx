@@ -19,17 +19,16 @@ import { Form } from "react-router-dom";
 //TODO refactor with reusable components 'DetailsTitle', 'DetailsNotes', 'DetailReminder', 'DetailsPriotiry', 'SubTasksList'
 
 //TODO compare passing props to details components with taking props inside components
-function MainInfoTask() {
+function TaskInfo() {
   const { updTask, dispatch } = useUpdateTask();
   const { id: selectedId } = useParams();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target);
-    // console.log("test", updTask);
-    // await controller.updateTask(selectedId, { ...updTask });
-    // navigate("/app");
+    console.log("test", updTask);
+    await controller.updateTask(selectedId, { ...updTask });
+    navigate("/app");
   };
   return (
     <div className="mt-5 divide-y-2 ">
@@ -48,9 +47,7 @@ function MainInfoTask() {
         <div className="flex justify-end pt-5">
           <Button
             className="mr-1 bg-wedgewood-400 hover:bg-wedgewood-500 "
-            // onClick={confirmChanges}
             size="sm"
-            // onClick={handleSubmit}
             type="submit"
           >
             Confirm
@@ -64,4 +61,4 @@ function MainInfoTask() {
   );
 }
 
-export default MainInfoTask;
+export default TaskInfo;

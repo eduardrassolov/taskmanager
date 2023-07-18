@@ -22,7 +22,7 @@ function NewTaskForm() {
         {!isOpen ? (
           <>
             <div
-              className="items-left justify-left mx-auto flex  cursor-pointer px-2 py-3 hover:bg-gray-100 "
+              className="items-left justify-left flex  cursor-pointer px-2 py-3 hover:bg-gray-100 "
               onClick={() => setIsOpen(true)}
             >
               <AddIcon className=" w-5" />
@@ -37,10 +37,11 @@ function NewTaskForm() {
               value={taskName}
               onInput={({ target }) => setTaskName(target.value)}
               autoFocus
+              placeholder="Enter name of task"
               required
               type="text"
               name="title"
-              className="flex w-full py-2 sm:mx-auto"
+              className="flex w-full rounded-lg py-2 sm:mx-auto"
             />
           </>
         )}

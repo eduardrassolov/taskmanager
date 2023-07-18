@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import MainInfo from "./MainInfo";
+import TaskInfo from "./TaskInfo";
 import BackButton from "../../../components/buttons/BackButton";
 import { CurTaskProvider } from "./CurTaskContext";
 import Header from "../../../components/Header";
@@ -13,7 +13,7 @@ function TaskInfoPage() {
           <div className="mx-auto min-w-[350px] max-w-[600px] p-4">
             <BackButton size="sm">Go Back</BackButton>
             <Header>Edit Task</Header>
-            <MainInfo />
+            <TaskInfo />
           </div>
         </section>
       </CurTaskProvider>
