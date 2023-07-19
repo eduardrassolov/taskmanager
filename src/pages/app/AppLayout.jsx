@@ -1,17 +1,7 @@
 import { Outlet, useNavigation } from "react-router";
 import NavBar from "../../components/navbar/NavBar";
 import LoadingIndicator from "./LoadingIndicator.jsx";
-
-const navLinks = [
-  {
-    to: "/app",
-    text: "Tasks",
-  },
-  {
-    to: "/app/tasks/completed",
-    text: "Completed tasks",
-  },
-];
+import { navLinks } from "../../components/navbar/navLinksApp";
 
 function AppLayout() {
   const { state } = useNavigation();

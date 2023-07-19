@@ -18,10 +18,10 @@ function SubTaskItem({ subTask, dispatch }) {
 
   return (
     <div
-      className="mb-2 flex justify-between  bg-gray-50 "
+      className="mb-2 flex justify-between bg-gray-50 "
       key={crypto.randomUUID()}
     >
-      <div className="flex items-center">
+      <div className="overflow- flex items-center break-all">
         <input
           id={subTask.key}
           type="checkbox"

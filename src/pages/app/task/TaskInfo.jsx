@@ -16,6 +16,7 @@ import { Form } from "react-router-dom";
 //TODO compare passing props to details components with taking props inside components
 function TaskInfo() {
   const { updTask, dispatch } = useUpdateTask();
+
   const { id: selectedId } = useParams();
   const navigate = useNavigate();
 

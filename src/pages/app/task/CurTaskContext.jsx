@@ -64,5 +64,4 @@ function reducer(state, action) {
       throw new Error("Invalid action type");
   }
 }
-
 export { CurTaskProvider, useUpdateTask };

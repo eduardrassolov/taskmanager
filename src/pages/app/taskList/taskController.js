@@ -43,6 +43,7 @@ class TaskController {
         timeCompleted: null,
       },
       timeCompleted: null,
+      priority: "No priority",
     };
   }
 

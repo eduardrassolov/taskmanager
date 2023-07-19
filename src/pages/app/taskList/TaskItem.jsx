@@ -35,7 +35,7 @@ function TaskItem({ task }) {
       case "high":
         return style + "border-red-300";
       default:
-        return style + "border-gray-50";
+        return style;
     }
   };
 
@@ -44,16 +44,23 @@ function TaskItem({ task }) {
       <div className={taskItemStyle()} onClick={handleItemCLick}>
         <div className="flex w-full justify-between">
           <div className="flex cursor-pointer items-center">
-            <input
-              onInput={handleCheckbox}
-              defaultChecked={task.isCompleted.status}
-              type="checkbox"
-              id={task.id}
-              className="h-5 w-5 cursor-pointer rounded-full text-wedgewood-500 shadow hover:bg-wedgewood-300 focus:ring-current"
-            />
-            <label htmlFor={task.id} className="text-slate-600 mx-2 text-xl">
-              {task.title}
-            </label>
+            <div>
+              <input
+                onInput={handleCheckbox}
+                defaultChecked={task.isCompleted.status}
+                type="checkbox"
+                id={task.id}
+                className="h-5 w-5 cursor-pointer rounded-full text-wedgewood-500 shadow hover:bg-wedgewood-300 focus:ring-current"
+              />
+            </div>
+            <div className="mx-2">
+              <label
+                htmlFor={task.id}
+                className="text-slate-600 break-all text-xl"
+              >
+                {task.title}
+              </label>
+            </div>
           </div>
 
           <Form method="delete" className="flex items-center">
