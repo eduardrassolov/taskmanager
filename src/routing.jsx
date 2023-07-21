@@ -8,11 +8,12 @@ import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
 import { action as taskAction } from "./pages/app/newTask/newTaskAction";
+import { API_URL } from "./config";
 
 const ROUTES = {
   home: "/",
-  app: "app",
-  tasks: "tasks",
+  app: API_URL + "/app",
+  tasks: API_URL + "/tasks",
   selectedTask: "/:id",
   completed: "tasks/completed",
 };
