@@ -1,24 +1,26 @@
 import { useState } from "react";
 import { Collapse } from "@material-tailwind/react";
 import { PlusIcon as AddIcon } from "@heroicons/react/24/outline";
-// import { XMarkIcon as CancelIcon } from "@heroicons/react/24/outline";
-// import { newTaskReducer as reducer, initialState } from "./newTaskReducer.js";
 
 import { Form, useActionData } from "react-router-dom";
-import "animate.css";
 import Button from "../../../components/buttons/Button";
 
 function NewTaskForm() {
-  // const [{ isOpen, taskName }, dispatch] = useReducer(reducer, initialState);
   const [taskName, setTaskName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const error = useActionData();
-  console.log("err", error);
+  const actionData = useActionData();
+  console.log("actuin", actionData);
 
+  const closeForm = () => {
+    setIsOpen(false);
+    setTaskName("");
+  };
+
+  function cleanUp() {}
   return (
     <>
-      <Form method="post" className="mx-auto mb-5 ">
+      <Form method="post" action="/app/tasks" className="mx-auto mb-5 ">
         {!isOpen ? (
           <>
             <div
@@ -47,8 +49,10 @@ function NewTaskForm() {
         )}
         <Collapse open={isOpen}>
           <div className=" mt-2 flex  items-center py-1">
-            <Button type={"submit"}>Add task</Button>
-            <Button variant={"outlined"} onClick={() => setIsOpen(false)}>
+            <Button type={"submit"} onClick={cleanUp}>
+              Add task
+            </Button>
+            <Button variant={"outlined"} onClick={closeForm}>
               Cancel
             </Button>
           </div>

@@ -1,4 +1,4 @@
-import { Navigate, createHashRouter, redirect } from "react-router-dom";
+import { Navigate, createHashRouter } from "react-router-dom";
 import Main from "./pages/main/MainPage";
 
 import AppLayout from "./pages/app/AppLayout";
@@ -7,7 +7,7 @@ import TaskInfoPage from "./pages/app/task/TaskInfoPage";
 import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
-import { action as taskAction } from "./pages/app/newTask/newTaskAction";
+import { taskAction } from "./pages/app/taskList/taskAction.js";
 
 const ROUTES = {
   home: "/",
@@ -35,10 +35,7 @@ const routing = createHashRouter([
         path: ROUTES.tasks,
         element: <TaskListPage />,
         loader: controller.loadTasks,
-        action: async ({ request }) => {
-          await taskAction({ request });
-          return redirect(`/app`);
-        },
+        action: taskAction,
       },
 
       // TODO refactor to one path

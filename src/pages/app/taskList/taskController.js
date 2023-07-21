@@ -7,28 +7,14 @@ class TaskController {
     const status = url.searchParams.get("status");
 
     const requestQuery = `${API_URL}${QUERY}?status=${status}`;
-    console.log("query", requestQuery);
 
     try {
       const response = await axios.get(requestQuery);
       const data = await response.data;
-      console.log("data", data);
       return {
         data,
         error: null,
-      };
-    } catch (error) {
-      return { data: null, error: error };
-    }
-  }
-  async loadCompletedTasks() {
-    try {
-      const response = await axios.get(`${API_URL}${QUERY}/completed`);
-      const data = await response.data;
-      console.log("rcvd data", data);
-      return {
-        data,
-        error: null,
+        status,
       };
     } catch (error) {
       return { data: null, error: error };
@@ -52,8 +38,7 @@ class TaskController {
     try {
       const task = this._GenereateTask(taskName);
       const response = await axios.post(`${API_URL}${QUERY}`, task);
-
-      return { data: response.status, error: null };
+      return { data: response.status, error: null, text: "added" };
     } catch (error) {
       return { data: null, error: error };
     }
@@ -61,20 +46,18 @@ class TaskController {
   async completeTask(id) {
     try {
       const response = await axios.post(`${API_URL}${QUERY}/${id}/complete`);
-      console.log(response);
       if (response.status !== 200) throw new Error("Task cannot be completed");
+      return { data: response.status, error: null };
     } catch (err) {
-      console.error(err);
+      return { error: err, data: null };
     }
   }
   async deleteTask(id) {
     try {
       const res = await axios.delete(`${API_URL}${QUERY}/${id}/delete`);
-
       if (res.status !== 200)
         throw new Error("Something went wrong while deleting task");
-
-      return { response: res.status, error: null };
+      return { data: res.status, error: null };
     } catch (err) {
       return { error: err };
     }

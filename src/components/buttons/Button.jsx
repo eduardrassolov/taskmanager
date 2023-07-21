@@ -7,6 +7,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   type: PropTypes.string,
   size: PropTypes.string,
+  name: PropTypes.string,
 };
 
 const btnStyle = {
@@ -25,6 +26,7 @@ function Button({
   variant = "primary",
   size = "sm",
   type = "button",
+  name = "",
 }) {
   const style = `${btnStyle.defaultStyle} ${btnStyle[variant]} text-` + size;
   return (

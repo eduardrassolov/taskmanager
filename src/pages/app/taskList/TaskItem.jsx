@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 // import { XCircleIcon as DeleteIcon } from "@heroicons/react/24/outline";
 import { PiTrash } from "react-icons/pi";
 import { useNavigate } from "react-router";
-import { Form } from "react-router-dom";
+import { Form, useSubmit } from "react-router-dom";
 import "animate.css";
-import { controller } from "./taskController";
+// import { controller } from "./taskController";
 import BageList from "./BageList";
 
 TaskItem.propTypes = {
@@ -13,12 +13,23 @@ TaskItem.propTypes = {
 
 function TaskItem({ task }) {
   const navigate = useNavigate();
+  const submit = useSubmit();
 
-  const handleCheckbox = async () => {
-    controller.completeTask(task._id).then((res) => {
-      navigate("/app/tasks");
-    });
+  // const handleCheckbox = async (e) => {
+  //   const { data, error } = await controller.completeTask(task._id);
+  //   console.log(data, error);
+  //   console.log(e);
+  // };
+
+  const handleCheckbox = async (e) => {
+    // fetcher.submit({ taskId: task._id }, { method: "put", action: "?" });
+    submit({ taskId: task._id }, { method: "put" });
   };
+
+  const handleDelete = async () => {
+    submit({ taskId: task._id }, { method: "delete" });
+  };
+
   const handleItemCLick = ({ target }) => {
     if (target.tagName === "DIV" || target.tagName === "LABEL")
       navigate(`${task._id}`);
@@ -45,13 +56,15 @@ function TaskItem({ task }) {
         <div className="flex w-full justify-between">
           <div className="flex cursor-pointer items-center">
             <div>
-              <input
-                onInput={handleCheckbox}
-                defaultChecked={task.isCompleted.status}
-                type="checkbox"
-                id={task.id}
-                className="h-5 w-5 cursor-pointer rounded-full text-wedgewood-500 shadow hover:bg-wedgewood-300 focus:ring-current"
-              />
+              <Form>
+                <input
+                  onChange={handleCheckbox}
+                  defaultChecked={task.isCompleted.status}
+                  type="checkbox"
+                  id={task.id}
+                  className="h-5 w-5 cursor-pointer rounded-full text-wedgewood-500 shadow hover:bg-wedgewood-300 focus:ring-current"
+                />
+              </Form>
             </div>
             <div className="mx-2">
               <label
@@ -63,8 +76,8 @@ function TaskItem({ task }) {
             </div>
           </div>
 
-          <Form method="delete" className="flex items-center">
-            <button type="submit" name="taskId" value={task._id}>
+          <Form className="flex items-center">
+            <button name="taskId" onClick={handleDelete} value={task._id}>
               <PiTrash className="text-500 h-6 w-auto cursor-pointer text-gray-500 hover:text-wedgewood-800" />
             </button>
           </Form>
