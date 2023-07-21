@@ -64,6 +64,7 @@ class TaskController {
   }
   async getTaskById({ params }) {
     const { id } = params;
+    console.log(id);
     try {
       const response = await axios.get(`${API_URL}${QUERY}/${id}`);
       const data = await response.data;

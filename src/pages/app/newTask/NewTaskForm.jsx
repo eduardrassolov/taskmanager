@@ -2,15 +2,12 @@ import { useState } from "react";
 import { Collapse } from "@material-tailwind/react";
 import { PlusIcon as AddIcon } from "@heroicons/react/24/outline";
 
-import { Form, useActionData } from "react-router-dom";
+import { Form } from "react-router-dom";
 import Button from "../../../components/buttons/Button";
 
 function NewTaskForm() {
   const [taskName, setTaskName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
-  const actionData = useActionData();
-  console.log("actuin", actionData);
 
   const closeForm = () => {
     setIsOpen(false);
@@ -20,7 +17,7 @@ function NewTaskForm() {
   function cleanUp() {}
   return (
     <>
-      <Form method="post" action="/app/tasks" className="mx-auto mb-5 ">
+      <Form method="post" className="mx-auto mb-5 ">
         {!isOpen ? (
           <>
             <div

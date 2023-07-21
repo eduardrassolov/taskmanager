@@ -3,7 +3,7 @@ import Main from "./pages/main/MainPage";
 
 import AppLayout from "./pages/app/AppLayout";
 import TaskListPage from "./pages/app/taskList/TaskListPage";
-import TaskInfoPage from "./pages/app/task/TaskInfoPage";
+import TaskInfoPage from "./pages/app/editTask/TaskInfoPage";
 import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
@@ -13,7 +13,7 @@ const ROUTES = {
   home: "/",
   app: "/app",
   tasks: `/app/tasks`,
-  selectedTask: "/:id",
+  selectedTask: "/app/tasks/:id/edit",
 };
 
 const routing = createHashRouter([
@@ -40,12 +40,7 @@ const routing = createHashRouter([
 
       // TODO refactor to one path
       {
-        path: `${ROUTES.tasks}${ROUTES.selectedTask}`,
-        element: <TaskInfoPage />,
-        loader: controller.getTaskById,
-      },
-      {
-        path: `${ROUTES.completed}${ROUTES.selectedTask}`,
+        path: ROUTES.selectedTask,
         element: <TaskInfoPage />,
         loader: controller.getTaskById,
       },

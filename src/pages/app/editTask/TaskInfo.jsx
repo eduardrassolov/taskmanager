@@ -39,7 +39,9 @@ function TaskInfo() {
   );
   return (
     <div className="mt-5 ">
-      <h2 className="text-left text-sm">Created: {formatedDate}</h2>
+      <h2 className="text-left text-sm text-gray-700">
+        Created: {formatedDate}
+      </h2>
       <Form onSubmit={handleSubmit} className="divide-gray divide-y-2">
         <DetailsTitle task={updTask} dispatch={dispatch} />
         <DetailsNotes />

@@ -32,7 +32,7 @@ function TaskItem({ task }) {
 
   const handleItemCLick = ({ target }) => {
     if (target.tagName === "DIV" || target.tagName === "LABEL")
-      navigate(`${task._id}`);
+      navigate(`/app/tasks/${task._id}/edit`);
   };
 
   const taskItemStyle = () => {
