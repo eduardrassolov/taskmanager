@@ -10,6 +10,7 @@ TaskListPage.propTypes = {
 
 function TaskListPage({ showCompleted = false }) {
   const { data: tasksList } = useLoaderData();
+  console.log(tasksList);
 
   return (
     <>

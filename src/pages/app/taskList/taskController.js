@@ -18,15 +18,27 @@ class TaskController {
     });
   }
 
-  async loadAllTasks(isCompleted, sortBy = "name") {
+  async loadTasks(request) {
+    console.log(request.filter);
     try {
       const response = await axios.get(`${API_URL}${QUERY}`);
       const data = await response.data;
-
+      console.log("data", data);
       return {
-        data: this._sortTasksByDate(
-          data.filter((task) => task.isCompleted.status === isCompleted)
-        ),
+        data,
+        error: null,
+      };
+    } catch (error) {
+      return { data: null, error: error };
+    }
+  }
+  async loadCompletedTasks() {
+    try {
+      const response = await axios.get(`${API_URL}${QUERY}/completed`);
+      const data = await response.data;
+      console.log("rcvd data", data);
+      return {
+        data,
         error: null,
       };
     } catch (error) {

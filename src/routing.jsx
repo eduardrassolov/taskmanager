@@ -29,40 +29,34 @@ const routing = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        // By default open page tasks
         element: <Navigate replace to={ROUTES.tasks} />,
         index: true,
       },
       {
-        // Pages with all uncompleted tasks
         path: ROUTES.tasks,
         element: <TaskListPage />,
-        //TODO check if this is needed
-        loader: async () => controller.loadAllTasks(false),
+        loader: async ({ request }) => controller.loadTasks(request),
         action: async ({ request }) => {
           await taskAction({ request });
           return redirect(`/app`);
         },
       },
       {
-        // Pages whows all completed tasks
         path: ROUTES.completed,
         element: <TaskListPage showCompleted={true} />,
-        //TODO check if this is needed
-        loader: async () => controller.loadAllTasks(true),
+        loader: controller.loadCompletedTasks,
         action: async ({ request }) => {
           await taskAction({ request });
           return redirect(`/app/tasks/completed`);
         },
       },
+      // TODO refactor to one path
       {
-        //Shows selected task
         path: `${ROUTES.tasks}${ROUTES.selectedTask}`,
         element: <TaskInfoPage />,
         loader: controller.getTaskById,
       },
       {
-        //Shows selected task
         path: `${ROUTES.completed}${ROUTES.selectedTask}`,
         element: <TaskInfoPage />,
         loader: controller.getTaskById,
