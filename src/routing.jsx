@@ -8,12 +8,13 @@ import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
 import { action as taskAction } from "./pages/app/newTask/newTaskAction";
-import { API_URL } from "./config";
+
+const main = "https://taskmanager-nu-peach.vercel.app/";
 
 const ROUTES = {
   home: "/",
-  app: API_URL + "/app",
-  tasks: API_URL + "/tasks",
+  app: main + "/app",
+  tasks: main + "/tasks",
   selectedTask: "/:id",
   completed: "tasks/completed",
 };
