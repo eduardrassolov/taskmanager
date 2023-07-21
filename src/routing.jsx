@@ -9,7 +9,7 @@ import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
 import { action as taskAction } from "./pages/app/newTask/newTaskAction";
 
-const main = "https://taskmanager-nu-peach.vercel.app/";
+const main = "https://taskmanager-nu-peach.vercel.app";
 
 const ROUTES = {
   home: "/",
