@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter, redirect } from "react-router-dom";
+import { Navigate, createHashRouter, redirect } from "react-router-dom";
 import Main from "./pages/main/MainPage";
 
 import AppLayout from "./pages/app/AppLayout";
@@ -9,17 +9,15 @@ import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
 import { action as taskAction } from "./pages/app/newTask/newTaskAction";
 
-const main = "https://taskmanager-nu-peach.vercel.app";
-
 const ROUTES = {
   home: "/",
-  app: main + "/app",
-  tasks: `${main}/app/tasks}`,
+  app: "/app",
+  tasks: `/app/tasks`,
   selectedTask: "/:id",
   completed: "tasks/completed",
 };
 
-const routing = createBrowserRouter([
+const routing = createHashRouter([
   {
     path: ROUTES.home,
     element: <Main />,
