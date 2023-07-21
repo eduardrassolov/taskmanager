@@ -14,7 +14,7 @@ const main = "https://taskmanager-nu-peach.vercel.app";
 const ROUTES = {
   home: "/",
   app: main + "/app",
-  tasks: main + "/tasks",
+  tasks: `{${this.app}/tasks}`,
   selectedTask: "/:id",
   completed: "tasks/completed",
 };
