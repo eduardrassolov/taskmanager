@@ -14,7 +14,6 @@ const ROUTES = {
   app: "/app",
   tasks: `/app/tasks`,
   selectedTask: "/:id",
-  completed: "tasks/completed",
 };
 
 const routing = createHashRouter([
@@ -35,21 +34,13 @@ const routing = createHashRouter([
       {
         path: ROUTES.tasks,
         element: <TaskListPage />,
-        loader: async ({ request }) => controller.loadTasks(request),
+        loader: controller.loadTasks,
         action: async ({ request }) => {
           await taskAction({ request });
           return redirect(`/app`);
         },
       },
-      {
-        path: ROUTES.completed,
-        element: <TaskListPage showCompleted={true} />,
-        loader: controller.loadCompletedTasks,
-        action: async ({ request }) => {
-          await taskAction({ request });
-          return redirect(`/app/tasks/completed`);
-        },
-      },
+
       // TODO refactor to one path
       {
         path: `${ROUTES.tasks}${ROUTES.selectedTask}`,
