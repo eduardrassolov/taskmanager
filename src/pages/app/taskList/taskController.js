@@ -20,7 +20,6 @@ class TaskController {
       return { data: null, error: error };
     }
   }
-
   _GenereateTask(title) {
     return {
       title,
@@ -33,7 +32,6 @@ class TaskController {
       priority: "No priority",
     };
   }
-
   async addNewTask(taskName) {
     try {
       const task = this._GenereateTask(taskName);
@@ -74,10 +72,8 @@ class TaskController {
       return { data: null, error };
     }
   }
-  async updateTask(id, updatedTask) {
-    delete updatedTask._id;
-    delete updatedTask.__v;
 
+  async updateTask(id, updatedTask) {
     console.log("test2", updatedTask);
 
     try {

@@ -8,7 +8,7 @@ const Toggle = ({ status, onChange }) => (
       style={{ display: "flex", alignItems: "center" }}
     >
       <Switch.Root
-        className=" relative h-[30px] w-[50px] cursor-default rounded-full border-2 bg-background  outline-none  data-[state=checked]:bg-[#2ecc71]"
+        className=" relative h-[30px] w-[50px] cursor-default rounded-full border-2 bg-background outline-none active:ring-1  data-[state=checked]:bg-[#2ecc71]"
         id="switcher"
         style={{ WebkitTapHighlightColor: "rgba(0, 0, 0, 0)" }}
         checked={status}

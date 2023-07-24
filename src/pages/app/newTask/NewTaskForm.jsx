@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { Collapse } from "@material-tailwind/react";
 import { PlusIcon as AddIcon } from "@heroicons/react/24/outline";
-
 import { Form } from "react-router-dom";
-import Button from "../../../components/buttons/Button";
+
+import Button from "../../../components/buttons/Button.jsx";
 
 function NewTaskForm() {
   const [taskName, setTaskName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const closeForm = () => {
+  const handleClickAdd = () => {
+    setIsOpen(true);
+  };
+  const handleCloseForm = () => {
     setIsOpen(false);
-    setTaskName("");
   };
 
-  function cleanUp() {}
   return (
     <>
       <Form method="post" className="mx-auto mb-5 ">
@@ -22,7 +23,7 @@ function NewTaskForm() {
           <>
             <div
               className="items-left justify-left flex  cursor-pointer px-2 py-3 hover:bg-gray-100 "
-              onClick={() => setIsOpen(true)}
+              onClick={handleClickAdd}
             >
               <AddIcon className=" w-5" />
               <p className=" mx-2 text-xl hover:text-wedgewood-800">
@@ -46,10 +47,8 @@ function NewTaskForm() {
         )}
         <Collapse open={isOpen}>
           <div className=" mt-2 flex  items-center py-1">
-            <Button type={"submit"} onClick={cleanUp}>
-              Add task
-            </Button>
-            <Button variant={"outlined"} onClick={closeForm}>
+            <Button type={"submit"}>Add task</Button>
+            <Button variant={"outlined"} onClick={handleCloseForm}>
               Cancel
             </Button>
           </div>

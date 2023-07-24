@@ -2,20 +2,16 @@ import { AiOutlineDelete } from "react-icons/ai";
 import PropTypes from "prop-types";
 
 SubTaskItem.propTypes = {
-  subTask: PropTypes.object,
-  dispatch: PropTypes.func,
+  task: PropTypes.object,
+  onRemove: PropTypes.func,
+  onUpdate: PropTypes.func,
+  index: PropTypes.number,
 };
 
 //TODO refactor code down
-function SubTaskItem({ subTask, dispatch }) {
-  function handleCheckBox({ target }) {
-    console.log("target", target);
-    dispatch({
-      type: "completeSubtask",
-      payload: target.id,
-    });
-  }
-
+function SubTaskItem({ task, onRemove, onUpdate, index }) {
+  const handleCheckBox = () =>
+    onUpdate(index, { ...task, isCompleted: !task.isCompleted });
   return (
     <div
       className="mb-2 flex justify-between bg-gray-50 "
@@ -23,21 +19,21 @@ function SubTaskItem({ subTask, dispatch }) {
     >
       <div className="overflow- flex items-center break-all">
         <input
-          id={subTask.key}
+          id={task.key}
           type="checkbox"
           className="mr-1"
-          defaultChecked={subTask.isCompleted}
+          defaultChecked={task.isCompleted}
           onInput={handleCheckBox}
         />
 
         <label
-          htmlFor={subTask.key}
+          htmlFor={task.key}
           suppressContentEditableWarning={true}
           className={`${
-            subTask.isCompleted ? "line-through" : ""
+            task.isCompleted ? "line-through" : ""
           }  cursor-pointer`}
         >
-          {subTask.title}
+          {task.title}
         </label>
       </div>
 
@@ -46,9 +42,7 @@ function SubTaskItem({ subTask, dispatch }) {
         <AiOutlineDelete
           className="cursor-pointer"
           size={"1.2rem"}
-          onClick={() =>
-            dispatch({ type: "removeSubtask", payload: subTask.key })
-          }
+          onClick={() => onRemove(index)}
         />
       </div>
     </div>

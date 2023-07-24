@@ -1,27 +1,31 @@
 import { AiOutlineComment } from "react-icons/ai";
-import { useUpdateTask } from "../CurTaskContext";
+import PropTypes from "prop-types";
+import HeaderInfo from "./HeaderInfo";
 
-function DetailsNotes() {
-  // const { editedTask, editField } = useTaskDetail();
-  // const handleTextChange = ({ target }) => editField("notes", target.value);
-  const { updTask, dispatch } = useUpdateTask();
+DetailsNotes.propTypes = {
+  task: PropTypes.object,
+  dispatch: PropTypes.func,
+  register: PropTypes.func,
+};
 
+function DetailsNotes({ task, dispatch, register }) {
   return (
     <div className="mb-5 flex flex-col pt-5">
-      <div className="mb-2 flex w-full items-center">
-        <AiOutlineComment size={"2rem"} />
-        <h2 className="ml-1">Task notes:</h2>
-      </div>
+      <HeaderInfo IconComp={<AiOutlineComment size={"1.5rem"} />}>
+        Task notes:
+      </HeaderInfo>
 
       <div className="w-full">
         <textarea
+          {...register("notes")}
           label="Add your notes..."
           className="w-full resize-none rounded-lg text-base focus:ring-0"
           rows={3}
-          defaultValue={updTask.notes || ""}
-          onInput={({ target }) =>
-            dispatch({ type: "notes", payload: target.value })
-          }
+          name="notes"
+          defaultValue={task.notes || ""}
+          // onInput={({ target }) =>
+          //   dispatch({ type: "notes", payload: target.value })
+          // }
         />
       </div>
     </div>

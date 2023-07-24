@@ -1,18 +1,32 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { GrTree } from "react-icons/gr";
 import SubTaskItem from "./SubTaskItem";
 import { useUpdateTask } from "../../CurTaskContext";
 import Progress from "./ProgressBar";
 import Button from "../../../../../components/buttons/Button";
+import PropTypes from "prop-types";
+import { useFieldArray } from "react-hook-form";
+import { propTypesIndex } from "@material-tailwind/react/types/components/select";
+import HeaderInfo from "../HeaderInfo";
 
-function SubTasksList() {
-  const { updTask, dispatch } = useUpdateTask();
-  //Array of subtasks
-  const subTasks = updTask?.subTasks || [];
-  //State to show or hide the form to add subtasks
+SubTasksList.propTypes = {
+  register: PropTypes.func,
+  control: PropTypes.object,
+  setValue: PropTypes.func,
+  task: PropTypes.object,
+};
+
+function SubTasksList({ register, control, setValue, task }) {
   const [showInput, setShowInput] = useState(false);
-  //State to store the value of the name subtask input
   const [subtaskTitle, setSubtaskTitle] = useState("");
+
+  // eslint-disable-next-line no-unused-vars
+  const { fields, append, remove, update } = useFieldArray({
+    control,
+    name: "subTasks",
+  });
+  const countCompleted = fields.filter((subTask) => subTask.isCompleted).length;
 
   //Input change event of the name subtask input
   const handleInput = ({ target }) => setSubtaskTitle((prev) => target.value);
@@ -20,13 +34,11 @@ function SubTasksList() {
   //Submit event of new subtask
   function handleAddSubtaskSubmit(e) {
     if (!subtaskTitle.trim()) return;
-    dispatch({
-      type: "addSubtask",
-      payload: {
-        key: crypto.randomUUID(),
-        title: subtaskTitle,
-        isCompleted: false,
-      },
+
+    append({
+      isCompleted: false,
+      title: subtaskTitle,
+      key: crypto.randomUUID(),
     });
     clean();
   }
@@ -35,33 +47,27 @@ function SubTasksList() {
     setShowInput(false);
   }
 
-  const countCompleted = subTasks.filter(
-    (subTask) => subTask.isCompleted
-  ).length;
-
-  console.log("subTasks", subTasks);
-  console.log("title", subtaskTitle);
+  // eslint-disable-next-line no-unused-vars
 
   return (
     <div className="mb-5 flex flex-col items-center pt-5">
-      <div className="mb-2 flex w-full items-center">
-        <GrTree size={"2rem"} className="self-start" />
-        <h2 className="ml-1">Subtasks:</h2>
-      </div>
+      <HeaderInfo IconComp={<GrTree size={"1.5rem"} />}>Subtasks:</HeaderInfo>
       <div className="mb-2 w-full">
-        {subTasks.length ? (
-          <Progress completed={countCompleted} total={subTasks.length} />
+        {fields.length ? (
+          <Progress completed={countCompleted} total={fields.length} />
         ) : null}
 
-        {subTasks.length
-          ? subTasks.map((subTask) => (
+        {fields.length
+          ? fields.map((task, index) => (
               <SubTaskItem
-                key={subTask.key}
-                subTask={subTask}
-                dispatch={dispatch}
+                key={task.id}
+                onRemove={remove}
+                onUpdate={update}
+                index={index}
+                task={task}
               />
             ))
-          : ""}
+          : null}
 
         {!showInput ? (
           <Button size={"xs"} onClick={() => setShowInput(true)}>
@@ -73,10 +79,11 @@ function SubTasksList() {
               type="text"
               className="my-2 h-8 w-full rounded-lg"
               onInput={handleInput}
-              value={subtaskTitle}
+              placeholder="Enter subtask name"
               autoFocus
               required
             />
+
             <div className="flex">
               <Button onClick={handleAddSubtaskSubmit} size="xs">
                 Add

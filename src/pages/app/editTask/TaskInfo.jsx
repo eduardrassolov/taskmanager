@@ -9,23 +9,30 @@ import { useUpdateTask } from "./CurTaskContext";
 import { controller } from "../taskList/taskController";
 import { useNavigate, useParams } from "react-router";
 import Button from "../../../components/buttons/Button";
-import { Form } from "react-router-dom";
+import { Form, useSubmit } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 //TODO refactor with reusable components 'DetailsTitle', 'DetailsNotes', 'DetailReminder', 'DetailsPriotiry', 'SubTasksList'
 
 //TODO compare passing props to details components with taking props inside components
 function TaskInfo() {
-  const { updTask, dispatch } = useUpdateTask();
-
-  const { id: selectedId } = useParams();
   const navigate = useNavigate();
+  const { updTask } = useUpdateTask();
+  const { id } = useParams();
+  const submit = useSubmit();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    await controller.updateTask(selectedId, { ...updTask });
-    navigate("/app");
-  };
+  const { register, handleSubmit, control, setValue } = useForm({
+    defaultValues: {
+      title: updTask?.title,
+      notes: updTask?.notes,
+      reminder: updTask.reminder
+        ? new Date(updTask?.reminder).toISOString().slice(0, 16)
+        : null,
+      priority: updTask?.priority,
+      subTasks: updTask?.subTasks,
+      id: updTask?._id,
+    },
+  });
 
   const formatedDate = new Date(updTask?.timeCreated).toLocaleDateString(
     "en-GB",
@@ -37,17 +44,31 @@ function TaskInfo() {
       minute: "numeric",
     }
   );
+
+  const onSubmit = async (data) => {
+    await controller.updateTask(id, data);
+    navigate(-1);
+  };
   return (
     <div className="mt-5 ">
       <h2 className="text-left text-sm text-gray-700">
         Created: {formatedDate}
       </h2>
-      <Form onSubmit={handleSubmit} className="divide-gray divide-y-2">
-        <DetailsTitle task={updTask} dispatch={dispatch} />
-        <DetailsNotes />
-        <DetailReminder />
-        <DetailsPriotiry />
-        <SubTasksList />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="divide-gray divide-y-2"
+      >
+        <DetailsTitle register={register} task={updTask} />
+        <DetailsNotes register={register} task={updTask} />
+        <DetailReminder register={register} task={updTask} />
+        <DetailsPriotiry register={register} task={updTask} />
+
+        <SubTasksList
+          register={register}
+          control={control}
+          setValue={setValue}
+          task={updTask}
+        />
 
         <div className="flex justify-end pt-5">
           <Button
@@ -61,7 +82,7 @@ function TaskInfo() {
             Cancel
           </Button>
         </div>
-      </Form>
+      </form>
     </div>
   );
 }

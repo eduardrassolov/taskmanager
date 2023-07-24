@@ -5,7 +5,7 @@ export const navLinks = [
   },
   {
     to: "/app/tasks?status=uncompleted",
-    text: "Uncompleted",
+    text: "To do",
   },
   {
     to: "/app/tasks?status=completed",

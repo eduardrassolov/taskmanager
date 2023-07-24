@@ -1,9 +1,8 @@
 import { Navigate, createHashRouter } from "react-router-dom";
 import Main from "./pages/main/MainPage";
-
 import AppLayout from "./pages/app/AppLayout";
 import TaskListPage from "./pages/app/taskList/TaskListPage";
-import TaskInfoPage from "./pages/app/editTask/TaskInfoPage";
+import TaskEditPage from "./pages/app/editTask/TaskEditPage";
 import Page404 from "./pages/Page404";
 import ErrorPage from "./components/ErrorPage";
 import { controller } from "./pages/app/taskList/taskController";
@@ -13,7 +12,7 @@ const ROUTES = {
   home: "/",
   app: "/app",
   tasks: `/app/tasks`,
-  selectedTask: "/app/tasks/:id/edit",
+  selected: "/app/tasks/:id/edit",
 };
 
 const routing = createHashRouter([
@@ -40,8 +39,8 @@ const routing = createHashRouter([
 
       // TODO refactor to one path
       {
-        path: ROUTES.selectedTask,
-        element: <TaskInfoPage />,
+        path: ROUTES.selected,
+        element: <TaskEditPage />,
         loader: controller.getTaskById,
       },
     ],
