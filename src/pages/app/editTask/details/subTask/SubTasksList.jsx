@@ -62,6 +62,7 @@ function SubTasksList({ register, control, setValue, task }) {
                 key={task.id}
                 onRemove={remove}
                 onUpdate={update}
+                register={register}
                 index={index}
                 task={task}
               />
