@@ -48,7 +48,7 @@ function TaskItem({ task }) {
               <Form>
                 <input
                   onChange={handleCheckbox}
-                  defaultChecked={task.isCompleted.status}
+                  checked={task.isCompleted}
                   type="checkbox"
                   id={task.id}
                   className="h-5 w-5 cursor-pointer rounded-full text-wedgewood-500 shadow hover:bg-wedgewood-300 focus:ring-current"

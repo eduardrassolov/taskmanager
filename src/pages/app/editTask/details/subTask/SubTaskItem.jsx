@@ -10,8 +10,10 @@ SubTaskItem.propTypes = {
 
 //TODO refactor code down
 function SubTaskItem({ task, onRemove, onUpdate, index }) {
-  const handleCheckBox = () =>
+  const handleCheckBox = (e) => {
+    console.log({ ...task });
     onUpdate(index, { ...task, isCompleted: !task.isCompleted });
+  };
   return (
     <div
       className="mb-2 flex justify-between bg-gray-50 "
@@ -28,7 +30,6 @@ function SubTaskItem({ task, onRemove, onUpdate, index }) {
 
         <label
           htmlFor={task.key}
-          suppressContentEditableWarning={true}
           className={`${
             task.isCompleted ? "line-through" : ""
           }  cursor-pointer`}

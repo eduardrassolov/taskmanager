@@ -34,7 +34,6 @@ function SubTasksList({ register, control, setValue, task }) {
   //Submit event of new subtask
   function handleAddSubtaskSubmit(e) {
     if (!subtaskTitle.trim()) return;
-
     append({
       isCompleted: false,
       title: subtaskTitle,

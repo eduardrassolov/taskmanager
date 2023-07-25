@@ -7,14 +7,15 @@ import HeaderInfo from "./HeaderInfo";
 DetailReminder.propTypes = {
   register: PropTypes.func,
   task: PropTypes.object,
+  onReset: PropTypes.func,
 };
+const minDate = new Date().toISOString().slice(0, 16);
 
-function DetailReminder({ register, task }) {
+function DetailReminder({ register, task, onReset }) {
   const [isDisabled, setDisabled] = useState(task?.reminder);
 
-  const minDate = new Date().toISOString().slice(0, 16);
-
-  function handleReminder() {
+  function handleReminder(checked) {
+    if (!checked) onReset("reminder", null);
     setDisabled((prev) => !prev);
   }
 
@@ -32,20 +33,12 @@ function DetailReminder({ register, task }) {
       <div className="flex w-full items-center justify-between">
         <input
           {...register("reminder")}
-          defaultValue={new Date(task.reminder)}
           type="datetime-local"
           className=" mr-2 w-full rounded-xl focus:ring-0 focus:ring-offset-0 disabled:text-gray-400"
           disabled={!isDisabled}
           min={minDate}
           required={isDisabled}
         />
-
-        <button
-          onClick={handleReminder}
-          className="text-wedgewood-500 hover:text-wedgewood-400"
-        >
-          {/* {isDisabled ? "Off" : "On"} */}
-        </button>
         <Toggle status={isDisabled} onChange={handleReminder} />
       </div>
     </div>

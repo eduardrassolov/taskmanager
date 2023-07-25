@@ -1,7 +1,21 @@
 import axios from "axios";
 import { API_URL, QUERY } from "../../../config.js";
 
+// const defaultResponse = {
+//   data: null,
+//   status: null,
+//   statusText: null,
+// };
+
 class TaskController {
+  _GenereateTask(title) {
+    return {
+      title,
+      timeCreated: new Date(),
+      isCompleted: false,
+      priority: "No priority",
+    };
+  }
   async loadTasks({ request }) {
     const url = new URL(request.url);
     const status = url.searchParams.get("status");
@@ -20,25 +34,17 @@ class TaskController {
       return { data: null, error: error };
     }
   }
-  _GenereateTask(title) {
-    return {
-      title,
-      timeCreated: new Date(),
-      isCompleted: {
-        status: false,
-        timeCompleted: null,
-      },
-      timeCompleted: null,
-      priority: "No priority",
-    };
-  }
   async addNewTask(taskName) {
     try {
       const task = this._GenereateTask(taskName);
-      const response = await axios.post(`${API_URL}${QUERY}`, task);
-      return { data: response.status, error: null, text: "added" };
+      const { status, statusText } = await axios.post(
+        `${API_URL}${QUERY}`,
+        task
+      );
+      console.log(status, statusText);
+      return { data: status, statusText: statusText };
     } catch (error) {
-      return { data: null, error: error };
+      return error;
     }
   }
   async completeTask(id) {
@@ -62,7 +68,6 @@ class TaskController {
   }
   async getTaskById({ params }) {
     const { id } = params;
-    console.log(id);
     try {
       const response = await axios.get(`${API_URL}${QUERY}/${id}`);
       const data = await response.data;
@@ -72,10 +77,8 @@ class TaskController {
       return { data: null, error };
     }
   }
-
   async updateTask(id, updatedTask) {
     console.log("test2", updatedTask);
-
     try {
       const response = await axios.put(
         `${API_URL}${QUERY}/${id}/update`,

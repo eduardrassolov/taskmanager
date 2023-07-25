@@ -6,9 +6,6 @@ export async function taskAction({ request }) {
   const id = form.get("taskId");
 
   switch (request.method) {
-    case "POST":
-      let title = form.get("title");
-      return await controller.addNewTask(title);
     case "PUT":
       return await controller.completeTask(id);
     case "DELETE":

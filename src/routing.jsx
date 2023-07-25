@@ -1,4 +1,4 @@
-import { Navigate, createHashRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import Main from "./pages/main/MainPage";
 import AppLayout from "./pages/app/AppLayout";
 import TaskListPage from "./pages/app/taskList/TaskListPage";
@@ -15,7 +15,7 @@ const ROUTES = {
   selected: "/app/tasks/:id/edit",
 };
 
-const routing = createHashRouter([
+const routing = createBrowserRouter([
   {
     path: ROUTES.home,
     element: <Main />,
@@ -35,13 +35,13 @@ const routing = createHashRouter([
         element: <TaskListPage />,
         loader: controller.loadTasks,
         action: taskAction,
+        errorElement: <ErrorPage />,
       },
-
-      // TODO refactor to one path
       {
         path: ROUTES.selected,
         element: <TaskEditPage />,
         loader: controller.getTaskById,
+        errorElement: <ErrorPage />,
       },
     ],
   },

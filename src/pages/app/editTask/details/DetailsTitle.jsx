@@ -19,15 +19,12 @@ function DetailsTitle({ task, register }) {
         </HeaderInfo>
         <div className="flex items-center">
           <input
-            {...register("status")}
-            defaultChecked={task?.isCompleted?.status}
+            {...register("isCompleted")}
             type="checkbox"
-            id={task._id}
             className="mx-3 h-5 w-5 cursor-pointer rounded-full text-wedgewood-500 shadow hover:bg-wedgewood-300 focus:ring-current"
           />
           <input
             {...register("title")}
-            defaultValue={task?.title}
             type="text"
             className="w-full rounded-lg p-1 text-base"
           />

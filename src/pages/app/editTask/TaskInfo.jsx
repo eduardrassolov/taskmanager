@@ -23,6 +23,7 @@ function TaskInfo() {
 
   const { register, handleSubmit, control, setValue } = useForm({
     defaultValues: {
+      isCompleted: updTask?.isCompleted || false,
       title: updTask?.title,
       notes: updTask?.notes,
       reminder: updTask.reminder
@@ -30,10 +31,8 @@ function TaskInfo() {
         : null,
       priority: updTask?.priority,
       subTasks: updTask?.subTasks,
-      id: updTask?._id,
     },
   });
-
   const formatedDate = new Date(updTask?.timeCreated).toLocaleDateString(
     "en-GB",
     {
@@ -47,11 +46,12 @@ function TaskInfo() {
 
   const onSubmit = async (data) => {
     await controller.updateTask(id, data);
+    console.log("data", data);
     navigate(-1);
   };
   return (
     <div className="mt-5 ">
-      <h2 className="text-left text-sm text-gray-700">
+      <h2 className="my-2 text-left text-sm text-gray-700">
         Created: {formatedDate}
       </h2>
       <form
@@ -60,7 +60,7 @@ function TaskInfo() {
       >
         <DetailsTitle register={register} task={updTask} />
         <DetailsNotes register={register} task={updTask} />
-        <DetailReminder register={register} task={updTask} />
+        <DetailReminder register={register} task={updTask} onReset={setValue} />
         <DetailsPriotiry register={register} task={updTask} />
 
         <SubTasksList

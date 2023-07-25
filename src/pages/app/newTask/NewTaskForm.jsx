@@ -1,24 +1,45 @@
 import { useState } from "react";
 import { Collapse } from "@material-tailwind/react";
 import { PlusIcon as AddIcon } from "@heroicons/react/24/outline";
-import { Form } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Button from "../../../components/buttons/Button.jsx";
+import { controller } from "../taskList/taskController.js";
 
 function NewTaskForm() {
   const [taskName, setTaskName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  console.log(location.state);
 
   const handleClickAdd = () => {
     setIsOpen(true);
   };
   const handleCloseForm = () => {
+    setTaskName("");
     setIsOpen(false);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!taskName.trim()) return;
+
+    const { data, statusText } = await controller.addNewTask(taskName);
+
+    console.log(data, statusText);
+    navigate(location.pathname);
+    cleanUp();
+  };
+  // eslint-disable-next-line no-unused-vars
+  function cleanUp() {
+    setTaskName("");
+    setIsOpen(false);
+  }
 
   return (
     <>
-      <Form method="post" className="mx-auto mb-5 ">
+      <form onSubmit={handleSubmit} className="mx-auto mb-5 ">
         {!isOpen ? (
           <>
             <div
@@ -46,14 +67,14 @@ function NewTaskForm() {
           </>
         )}
         <Collapse open={isOpen}>
-          <div className=" mt-2 flex  items-center py-1">
-            <Button type={"submit"}>Add task</Button>
+          <div className="mt-2 flex items-center py-1">
+            <Button type="submit">Add task</Button>
             <Button variant={"outlined"} onClick={handleCloseForm}>
               Cancel
             </Button>
           </div>
         </Collapse>
-      </Form>
+      </form>
     </>
   );
 }
