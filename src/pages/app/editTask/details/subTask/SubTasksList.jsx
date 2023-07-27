@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { GrTree } from "react-icons/gr";
 import SubTaskItem from "./SubTaskItem";
-import { useUpdateTask } from "../../CurTaskContext";
 import Progress from "./ProgressBar";
 import Button from "../../../../../components/buttons/Button";
 import PropTypes from "prop-types";

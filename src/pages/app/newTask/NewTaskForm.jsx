@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Collapse } from "@material-tailwind/react";
 import { PlusIcon as AddIcon } from "@heroicons/react/24/outline";
 import { useLocation, useNavigate } from "react-router-dom";
-
 import Button from "../../../components/buttons/Button.jsx";
 import { controller } from "../taskList/taskController.js";
 
@@ -12,11 +11,7 @@ function NewTaskForm() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log(location.state);
-
-  const handleClickAdd = () => {
-    setIsOpen(true);
-  };
+  const handleClickAdd = () => setIsOpen(true);
   const handleCloseForm = () => {
     setTaskName("");
     setIsOpen(false);
@@ -28,9 +23,11 @@ function NewTaskForm() {
     const { data, statusText } = await controller.addNewTask(taskName);
 
     console.log(data, statusText);
+
     navigate(location.pathname);
     cleanUp();
   };
+
   // eslint-disable-next-line no-unused-vars
   function cleanUp() {
     setTaskName("");

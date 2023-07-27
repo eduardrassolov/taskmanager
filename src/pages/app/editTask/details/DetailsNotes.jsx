@@ -8,7 +8,7 @@ DetailsNotes.propTypes = {
   register: PropTypes.func,
 };
 
-function DetailsNotes({ task, dispatch, register }) {
+function DetailsNotes({ task, register }) {
   return (
     <div className="mb-5 flex flex-col pt-5">
       <HeaderInfo IconComp={<AiOutlineComment size={"1.5rem"} />}>

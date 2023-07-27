@@ -15,7 +15,6 @@ class TaskController {
     const status = url.searchParams.get("status");
 
     const requestQuery = `${API_URL}${QUERY}?status=${status}`;
-
     try {
       const response = await axios.get(requestQuery);
       const data = await response.data;

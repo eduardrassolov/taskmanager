@@ -5,9 +5,8 @@ import DetailReminder from "./details/DetailReminder";
 import DetailsPriotiry from "./details/DetailsPriotiry";
 import SubTasksList from "./details/subTask/SubTasksList";
 
-import { useUpdateTask } from "./CurTaskContext";
 import { controller } from "../taskList/taskController";
-import { useNavigate, useParams } from "react-router";
+import { useLoaderData, useNavigate, useParams } from "react-router";
 import Button from "../../../components/buttons/Button";
 import { Form, useSubmit } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -17,7 +16,8 @@ import { useForm } from "react-hook-form";
 //TODO compare passing props to details components with taking props inside components
 function TaskInfo() {
   const navigate = useNavigate();
-  const { updTask } = useUpdateTask();
+  // const { updTask } = useUpdateTask();
+  const { data: updTask } = useLoaderData();
   const { id } = useParams();
   const submit = useSubmit();
 
@@ -43,7 +43,6 @@ function TaskInfo() {
       minute: "numeric",
     }
   );
-
   const onSubmit = async (data) => {
     await controller.updateTask(id, data);
     console.log("data", data);
