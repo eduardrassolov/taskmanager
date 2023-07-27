@@ -4,7 +4,7 @@ import AppLayout from "./pages/app/AppLayout";
 import TaskListPage from "./pages/app/taskList/TaskListPage";
 import TaskEditPage from "./pages/app/editTask/TaskEditPage";
 import Page404 from "./pages/Page404";
-import ErrorPage from "./components/ErrorPage";
+
 import { controller } from "./pages/app/taskList/taskController";
 import { taskAction } from "./pages/app/taskList/taskAction.js";
 
@@ -24,7 +24,7 @@ const routing = createBrowserRouter([
   {
     path: ROUTES.app,
     element: <AppLayout />,
-    errorElement: <ErrorPage />,
+
     children: [
       {
         element: <Navigate replace to={ROUTES.tasks} />,
@@ -35,13 +35,11 @@ const routing = createBrowserRouter([
         element: <TaskListPage />,
         loader: controller.loadTasks,
         action: taskAction,
-        errorElement: <ErrorPage />,
       },
       {
         path: ROUTES.selected,
         element: <TaskEditPage />,
         loader: controller.getTaskById,
-        errorElement: <ErrorPage />,
       },
     ],
   },

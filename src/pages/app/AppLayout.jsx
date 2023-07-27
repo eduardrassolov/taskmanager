@@ -2,6 +2,8 @@ import { Outlet, useNavigation } from "react-router";
 import NavBar from "../../components/navbar/NavBar";
 import LoadingIndicator from "./LoadingIndicator.jsx";
 import { navLinks } from "../../components/navbar/navLinksApp";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../../components/error/ErrorPage";
 
 function AppLayout() {
   const { state } = useNavigation();
@@ -11,7 +13,9 @@ function AppLayout() {
       {state === "loading" && <LoadingIndicator />}
 
       <NavBar links={navLinks} />
-      <Outlet />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Outlet />
+      </ErrorBoundary>
     </>
   );
 }

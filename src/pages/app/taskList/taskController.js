@@ -1,12 +1,6 @@
 import axios from "axios";
 import { API_URL, QUERY } from "../../../config.js";
 
-// const defaultResponse = {
-//   data: null,
-//   status: null,
-//   statusText: null,
-// };
-
 class TaskController {
   _GenereateTask(title) {
     return {
@@ -25,13 +19,16 @@ class TaskController {
     try {
       const response = await axios.get(requestQuery);
       const data = await response.data;
+      console.log(data, status);
       return {
         data,
         error: null,
         status,
       };
-    } catch (error) {
-      return { data: null, error: error };
+    } catch (err) {
+      const { message, code } = err;
+      console.log(err);
+      return { data: null, error: { message, code } };
     }
   }
   async addNewTask(taskName) {
